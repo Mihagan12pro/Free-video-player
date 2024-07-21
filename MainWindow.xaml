@@ -15,7 +15,10 @@
             <Slider Name="VolumeControlSlr"  Margin="487,355,230,28" ValueChanged="VolumeControlSlr_ValueChanged" ></Slider>
             <Slider Foreground="AliceBlue" Name="VideoSkipperSlr"   Margin="158,316,156,56" ValueChanged="VideoSkipperSlr_ValueChanged" ></Slider>
             <MediaElement Name="VideoPlayerMedia"  HorizontalAlignment="Left" Height="260" Margin="166,25,0,0" VerticalAlignment="Top" Width="459"/>
-            <Button Name="LoadFileBtn" Content="Choose file" HorizontalAlignment="Left" Margin="692,1,0,0" VerticalAlignment="Top" Width="81" />
+            <ListBox Name="PlayListLb"  Margin="658,101,12,178" BorderThickness="1" BorderBrush="Gray"/>
+            <Label Content="   Videos list"  BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" Margin="676,71,0,0" VerticalAlignment="Top" Width="76" Height="30"/>
+            <Button Name="AddToPlayList" Content="Add" HorizontalAlignment="Left" Margin="658,226,0,0" VerticalAlignment="Top" Width="51" Click="AddToPlayList_Click"/>
+            <Button x:Name="RemoveFromPlayList" Content="Remove" HorizontalAlignment="Left" Margin="719,226,0,0" VerticalAlignment="Top" Width="51"/>
         </Grid>
     </Viewbox>
 

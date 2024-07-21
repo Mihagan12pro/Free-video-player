@@ -29,8 +29,12 @@ namespace Free_video_player
             VideoPlayerMedia.LoadedBehavior = MediaState.Manual;
 
             this.AllowDrop = true;
-            this.DragEnter += new DragEventHandler(Window_DragEnter);
-            this.Drop += new DragEventHandler(Window_Drop);
+            //this.DragEnter += new DragEventHandler(Window_DragEnter);
+            //this.Drop += new DragEventHandler(Window_Drop);
+
+
+
+           
         }
 
         private void PauseAndPlayBtn_Click(object sender, RoutedEventArgs e)
@@ -63,37 +67,68 @@ namespace Free_video_player
                  VideoPlayerMedia.Position -= TimeSpan.FromSeconds(5);
         }
 
+
+
+        private void VideoPlayerLogic(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+
+
+
+
         private void SkipForwardBtn_Click(object sender, RoutedEventArgs e)
         {
             VideoPlayerMedia.Position += TimeSpan.FromSeconds(5);
+
+
+
         }
 
-
-        private void Window_DragEnter(object sender, DragEventArgs e)
+        private void AddToPlayList_Click(object sender, RoutedEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Video files (*.mp4;*.avi;*.mkv)|*.mp4;*.avi;*.mkv|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
             {
-                e.Effects = DragDropEffects.Copy;
-            }
-            else
-            {
-                e.Effects = DragDropEffects.None;
+                VideoPlayerMedia.Source = new Uri(openFileDialog.FileName);
+
+
+                PlayListLb.Items.Add(openFileDialog.FileName);
+                //VideoPlayerMedia.Play();
+                //isPlay = true;
+                //PauseAndPlayBtn.Content = "||";
             }
         }
 
-        private void Window_Drop(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (files.Length > 0)
-                {
-                    VideoPlayerMedia.Source = new Uri(files[0]);
-                    VideoPlayerMedia.Play();
-                    isPlay = true;
-                    PauseAndPlayBtn.Content = "||";
-                }
-            }
-        }
+
+        //private void Window_DragEnter(object sender, DragEventArgs e)
+        //{
+        //    if (e.Data.GetDataPresent(DataFormats.FileDrop))
+        //    {
+        //        e.Effects = DragDropEffects.Copy;
+        //    }
+        //    else
+        //    {
+        //        e.Effects = DragDropEffects.None;
+        //    }
+        //}
+
+        //private void Window_Drop(object sender, DragEventArgs e)
+        //{
+        //    if (e.Data.GetDataPresent(DataFormats.FileDrop))
+        //    {
+        //        string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+        //        if (files.Length > 0)
+        //        {
+        //            VideoPlayerMedia.Source = new Uri(files[0]);
+        //            VideoPlayerMedia.Play();
+        //            isPlay = true;
+        //            PauseAndPlayBtn.Content = "||";
+        //        }
+        //    }
+        //}
     }
 }
