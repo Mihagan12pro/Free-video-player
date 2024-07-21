@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,8 +26,11 @@ namespace Free_video_player
         {
             InitializeComponent();
 
+            VideoPlayerMedia.LoadedBehavior = MediaState.Manual;
 
-          
+            this.AllowDrop = true;
+            this.DragEnter += new DragEventHandler(Window_DragEnter);
+            this.Drop += new DragEventHandler(Window_Drop);
         }
 
         private void PauseAndPlayBtn_Click(object sender, RoutedEventArgs e)
@@ -41,6 +45,55 @@ namespace Free_video_player
             isPlay = true;
             PauseAndPlayBtn.Content = "▶";
 
+        }
+
+        private void VideoSkipperSlr_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            VideoPlayerMedia.Position = TimeSpan.FromSeconds(VideoSkipperSlr.Value);
+        }
+
+        private void VolumeControlSlr_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+           VideoPlayerMedia.Volume = (double)VolumeControlSlr.Value;
+        }
+
+        private void SkipBackwardBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (VideoPlayerMedia.Position >= TimeSpan.FromSeconds(5))
+                 VideoPlayerMedia.Position -= TimeSpan.FromSeconds(5);
+        }
+
+        private void SkipForwardBtn_Click(object sender, RoutedEventArgs e)
+        {
+            VideoPlayerMedia.Position += TimeSpan.FromSeconds(5);
+        }
+
+
+        private void Window_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effects = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+        }
+
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files.Length > 0)
+                {
+                    VideoPlayerMedia.Source = new Uri(files[0]);
+                    VideoPlayerMedia.Play();
+                    isPlay = true;
+                    PauseAndPlayBtn.Content = "||";
+                }
+            }
         }
     }
 }
