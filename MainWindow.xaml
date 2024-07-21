@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:Free_video_player"
         mc:Ignorable="d"
         Title="Free video player" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Viewbox>
+            <Grid>
+                <Canvas>
+          
+                </Canvas>
+            </Grid>
+        </Viewbox>
 </Window>
