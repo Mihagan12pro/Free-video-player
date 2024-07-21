@@ -49,6 +49,9 @@ namespace Free_video_player
             timer.Start(); // Запуск таймера
 
             VideoPlayerMedia.MediaOpened += VideoPlayerMedia_MediaOpened;
+
+
+            //RemoveFromPlayListBtn.Click += RemoveFromPlayListBtn_Click;
         }
 
         private void Timer_tick(object sender, EventArgs e)
@@ -87,15 +90,28 @@ namespace Free_video_player
 
         }
 
+
+
+
+
+
         private void VideoSkipperSlr_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoPlayerMedia.Position = TimeSpan.FromSeconds(VideoSkipperSlr.Value);
         }
 
+
+
+
+
         private void VolumeControlSlr_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
            VideoPlayerMedia.Volume = (double)VolumeControlSlr.Value;
         }
+
+
+
+
 
         private void SkipBackwardBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -117,6 +133,11 @@ namespace Free_video_player
 
 
         }
+
+
+
+
+
 
         private void AddToPlayList_Click(object sender, RoutedEventArgs e)
         {
@@ -146,6 +167,11 @@ namespace Free_video_player
         }
 
 
+
+
+
+
+
         private void Window_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -157,6 +183,11 @@ namespace Free_video_player
                 e.Effects = DragDropEffects.None;
             }
         }
+
+
+
+
+
 
         private void Window_Drop(object sender, DragEventArgs e)
         {
@@ -175,6 +206,8 @@ namespace Free_video_player
 
                     FileInfo fileInfo = new FileInfo(files[0]);
 
+                    filesList.Add(fileInfo);
+
                     if (IsFullPathCb.IsChecked != true)
                     {
                        
@@ -185,22 +218,28 @@ namespace Free_video_player
                     }
                     PlayListLb.Items.Add(fileInfo.FullName);
 
+                    
 
                 }
             }
         }
 
+
+
+
+
+
         private void PlayListLb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int indexInLb = PlayListLb.SelectedIndex;
 
+            
 
             ListBoxItem listBoxItem = (ListBoxItem)PlayListLb.ItemContainerGenerator.ContainerFromIndex(indexInLb);
 
             foreach(var file in filesList)
             {
-                var a = Convert.ToString(listBoxItem);
-                var a1 = a;
+                
 
                
                 if (file.FullName == Convert.ToString(listBoxItem).Replace("System.Windows.Controls.ListBoxItem: ","") || file.Name == Convert.ToString(listBoxItem).Replace("System.Windows.Controls.ListBoxItem: ", ""))
@@ -222,11 +261,67 @@ namespace Free_video_player
             
         }
 
+
+
+
+
+
         private void VideoPlayer_PositionChanged(object sender, RoutedPropertyChangedEventArgs<TimeSpan> e)
         {
         
                 VideoSkipperSlr.Value = e.NewValue.TotalSeconds;
             
         }
+
+
+
+
+
+
+        private void RemoveFromPlayListBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int indexInLb = PlayListLb.SelectedIndex;
+
+            if (indexInLb >= 0)
+            {
+
+                ListBoxItem listBoxItem = (ListBoxItem)PlayListLb.ItemContainerGenerator.ContainerFromIndex(indexInLb);
+
+                string itemString = Convert.ToString(listBoxItem).Replace("System.Windows.Controls.ListBoxItem: ", "");
+
+                foreach (var file in filesList)
+                {
+                    if (file.Name == itemString)
+                    {
+                        filesList.Remove(file);
+
+                        if (VideoPlayerMedia.Source == new Uri(file.FullName))
+                        {
+                            ClearVideoPlayer();
+                        }
+
+                        break;
+                    }
+                }
+
+
+
+                PlayListLb.Items.RemoveAt(indexInLb);
+            }
+        }
+
+
+
+
+
+        private void ClearVideoPlayer()
+        {
+            VideoPlayerMedia.Stop();
+            VideoPlayerMedia.Source = null; 
+            VideoPlayerMedia.Close(); 
+            VideoSkipperSlr.Value = 0; 
+        }
+
+
     }
 }

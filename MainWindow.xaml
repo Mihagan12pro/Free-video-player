@@ -22,11 +22,12 @@
                 <Label Content="   Videos list"  BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Height="30" Canvas.Left="668" Canvas.Top="16"/>
 
                 <Button Name="AddToPlayListBtn" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Click="AddToPlayList_Click" Canvas.Left="651" Canvas.Top="178"/>
-                <Button x:Name="RemoveFromPlayListBtn" Content="Remove" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Canvas.Left="712" Canvas.Top="178"/>
+                <Button x:Name="RemoveFromPlayListBtn" Content="Remove" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Canvas.Left="712" Canvas.Top="178" Click="RemoveFromPlayListBtn_Click"/>
                 <Button Name="ClearVideoListBtn" Content="Clear" Canvas.Left="683" Canvas.Top="230" HorizontalAlignment="Center" VerticalAlignment="Top" Width="43"></Button>
                 <Button Name="PlayAllVideosBtn" Content="Play all" Canvas.Left="651" Canvas.Top="204" HorizontalAlignment="Center" VerticalAlignment="Top" Width="112"/>
 
                 <CheckBox Name="IsFullPathCb" Content="Full path" Canvas.Left="656" Canvas.Top="257" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76"></CheckBox>
+ 
             </Canvas>
         </Grid>
     </Viewbox>
