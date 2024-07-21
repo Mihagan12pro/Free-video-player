@@ -15,10 +15,19 @@
             <Slider Name="VolumeControlSlr"  Margin="487,355,230,28" ValueChanged="VolumeControlSlr_ValueChanged" ></Slider>
             <Slider Foreground="AliceBlue" Name="VideoSkipperSlr"   Margin="158,316,156,56" ValueChanged="VideoSkipperSlr_ValueChanged" ></Slider>
             <MediaElement Name="VideoPlayerMedia"  HorizontalAlignment="Left" Height="260" Margin="166,25,0,0" VerticalAlignment="Top" Width="459"/>
-            <ListBox Name="PlayListLb"  Margin="658,101,12,178" BorderThickness="1" BorderBrush="Gray"/>
-            <Label Content="   Videos list"  BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" Margin="676,71,0,0" VerticalAlignment="Top" Width="76" Height="30"/>
-            <Button Name="AddToPlayList" Content="Add" HorizontalAlignment="Left" Margin="658,226,0,0" VerticalAlignment="Top" Width="51" Click="AddToPlayList_Click"/>
-            <Button x:Name="RemoveFromPlayList" Content="Remove" HorizontalAlignment="Left" Margin="719,226,0,0" VerticalAlignment="Top" Width="51"/>
+
+            <Canvas>
+
+                <ListBox Name="PlayListLb" MaxWidth="113" BorderThickness="1" BorderBrush="Gray" Height="124" Canvas.Left="650" Canvas.Top="46" Width="113"/>
+                <Label Content="   Videos list"  BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Height="30" Canvas.Left="668" Canvas.Top="16"/>
+
+                <Button Name="AddToPlayListBtn" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Click="AddToPlayList_Click" Canvas.Left="651" Canvas.Top="178"/>
+                <Button x:Name="RemoveFromPlayListBtn" Content="Remove" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Canvas.Left="712" Canvas.Top="178"/>
+                <Button Name="ClearVideoListBtn" Content="Clear" Canvas.Left="683" Canvas.Top="230" HorizontalAlignment="Center" VerticalAlignment="Top" Width="43"></Button>
+                <Button Name="PlayAllVideosBtn" Content="Play all" Canvas.Left="651" Canvas.Top="204" HorizontalAlignment="Center" VerticalAlignment="Top" Width="112"/>
+
+                <CheckBox Name="IsFullPathCb" Content="Full path" Canvas.Left="656" Canvas.Top="257" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76"></CheckBox>
+            </Canvas>
         </Grid>
     </Viewbox>
 

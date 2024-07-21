@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,10 @@ namespace Free_video_player
     public partial class MainWindow : Window
     {
         private bool isPlay = true;
+
+        private List<FileInfo> filesList = new List<FileInfo>();
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,7 +37,7 @@ namespace Free_video_player
             //this.DragEnter += new DragEventHandler(Window_DragEnter);
             //this.Drop += new DragEventHandler(Window_Drop);
 
-
+           
 
            
         }
@@ -95,8 +100,19 @@ namespace Free_video_player
             {
                 VideoPlayerMedia.Source = new Uri(openFileDialog.FileName);
 
+                FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
 
-                PlayListLb.Items.Add(openFileDialog.FileName);
+
+                filesList.Add(fileInfo);
+
+                if (IsFullPath.IsChecked == true)
+                {
+
+                    PlayListLb.Items.Add(fileInfo.FullName);
+                    return;
+                }
+
+                PlayListLb.Items.Add(fileInfo.Name);
                 //VideoPlayerMedia.Play();
                 //isPlay = true;
                 //PauseAndPlayBtn.Content = "||";
