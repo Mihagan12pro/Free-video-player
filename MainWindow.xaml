@@ -7,10 +7,13 @@
         mc:Ignorable="d"
         Title="Free video player" Height="450" Width="800">
     <Viewbox>
-            <Grid>
-                <Canvas>
-          
-                </Canvas>
-            </Grid>
-        </Viewbox>
+        <Grid>
+            <Button Name="SkipBackwardBtn" Content="◄◄" Height="30" Width="30" Margin="320,352,432,20" Background="Gray"></Button>
+            <Button Name="PauseBtn" Content="||" FontWeight="Heavy" Background="Gray" Height="30" Width="30" Margin="380,353,372,19" ></Button>
+            <Button Name="SkipForwardBtn" Content="►►" Width="30" Height="30" Background="Gray" Margin="450,353,302,19"></Button>
+            <Slider Name="VolumeControlSlr"  Margin="487,355,230,28" ></Slider>
+            <Slider Foreground="AliceBlue" Name="VideoSkipperSlr"  Margin="158,316,156,56" ></Slider>
+        </Grid>
+    </Viewbox>
+
 </Window>
