@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Free_video_player
 {
@@ -26,6 +27,7 @@ namespace Free_video_player
 
         private List<FileInfo> filesList = new List<FileInfo>();
 
+        private DispatcherTimer timer;
 
 
         public MainWindow()
@@ -38,11 +40,28 @@ namespace Free_video_player
             this.DragEnter += new DragEventHandler(Window_DragEnter);
             this.Drop += new DragEventHandler(Window_Drop);
 
+            timer = new DispatcherTimer();
 
+            timer.Interval = TimeSpan.FromMilliseconds(500);
 
+            timer.Tick += new EventHandler(Timer_tick);
 
+            timer.Start(); // Запуск таймера
+
+            VideoPlayerMedia.MediaOpened += VideoPlayerMedia_MediaOpened;
         }
 
+        private void Timer_tick(object sender, EventArgs e)
+        {
+            VideoSkipperSlr.Value = VideoPlayerMedia.Position.TotalSeconds;
+        }
+        private void VideoPlayerMedia_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            if (VideoPlayerMedia.NaturalDuration.HasTimeSpan)
+            {
+                VideoSkipperSlr.Maximum = VideoPlayerMedia.NaturalDuration.TimeSpan.TotalSeconds;
+            }
+        }
         private void PauseAndPlayBtn_Click(object sender, RoutedEventArgs e)
         {
         
@@ -85,11 +104,6 @@ namespace Free_video_player
         }
 
 
-
-        private void VideoPlayerLogic(object sender, RoutedEventArgs e)
-        {
-
-        }
 
 
 
@@ -205,6 +219,13 @@ namespace Free_video_player
                 }
              
             }
+            
+        }
+
+        private void VideoPlayer_PositionChanged(object sender, RoutedPropertyChangedEventArgs<TimeSpan> e)
+        {
+        
+                VideoSkipperSlr.Value = e.NewValue.TotalSeconds;
             
         }
     }
