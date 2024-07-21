@@ -18,7 +18,7 @@
 
             <Canvas>
 
-                <ListBox Name="PlayListLb" MaxWidth="113" BorderThickness="1" BorderBrush="Gray" Height="124" Canvas.Left="650" Canvas.Top="46" Width="113"/>
+                <ListBox Name="PlayListLb" MaxWidth="113" BorderThickness="1" BorderBrush="Gray" Height="124" Canvas.Left="650" Canvas.Top="46" Width="113" SelectionChanged="PlayListLb_SelectionChanged"/>
                 <Label Content="   Videos list"  BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Height="30" Canvas.Left="668" Canvas.Top="16"/>
 
                 <Button Name="AddToPlayListBtn" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Click="AddToPlayList_Click" Canvas.Left="651" Canvas.Top="178"/>

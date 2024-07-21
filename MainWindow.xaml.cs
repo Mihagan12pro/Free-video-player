@@ -27,6 +27,7 @@ namespace Free_video_player
         private List<FileInfo> filesList = new List<FileInfo>();
 
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,25 +35,36 @@ namespace Free_video_player
             VideoPlayerMedia.LoadedBehavior = MediaState.Manual;
 
             this.AllowDrop = true;
-            //this.DragEnter += new DragEventHandler(Window_DragEnter);
-            //this.Drop += new DragEventHandler(Window_Drop);
+            this.DragEnter += new DragEventHandler(Window_DragEnter);
+            this.Drop += new DragEventHandler(Window_Drop);
 
-           
 
-           
+
+
         }
 
         private void PauseAndPlayBtn_Click(object sender, RoutedEventArgs e)
         {
+        
+
+
+
             if (isPlay)
             {
                 isPlay = false;
-                PauseAndPlayBtn.Content = "||";
+                PauseAndPlayBtn.Content = "▶";
+
+                VideoPlayerMedia.Pause();
                 return;
             }
 
+ 
+
+
+
+            VideoPlayerMedia.Play();
             isPlay = true;
-            PauseAndPlayBtn.Content = "▶";
+            PauseAndPlayBtn.Content = "||";
 
         }
 
@@ -105,7 +117,7 @@ namespace Free_video_player
 
                 filesList.Add(fileInfo);
 
-                if (IsFullPath.IsChecked == true)
+                if (IsFullPathCb.IsChecked == true)
                 {
 
                     PlayListLb.Items.Add(fileInfo.FullName);
@@ -120,31 +132,80 @@ namespace Free_video_player
         }
 
 
-        //private void Window_DragEnter(object sender, DragEventArgs e)
-        //{
-        //    if (e.Data.GetDataPresent(DataFormats.FileDrop))
-        //    {
-        //        e.Effects = DragDropEffects.Copy;
-        //    }
-        //    else
-        //    {
-        //        e.Effects = DragDropEffects.None;
-        //    }
-        //}
+        private void Window_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effects = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+        }
 
-        //private void Window_Drop(object sender, DragEventArgs e)
-        //{
-        //    if (e.Data.GetDataPresent(DataFormats.FileDrop))
-        //    {
-        //        string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-        //        if (files.Length > 0)
-        //        {
-        //            VideoPlayerMedia.Source = new Uri(files[0]);
-        //            VideoPlayerMedia.Play();
-        //            isPlay = true;
-        //            PauseAndPlayBtn.Content = "||";
-        //        }
-        //    }
-        //}
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files.Length > 0)
+                {
+                    VideoPlayerMedia.Source = new Uri(files[0]);
+                    VideoPlayerMedia.Play();
+
+
+
+                    VideoPlayerMedia.Pause();
+              
+
+                    FileInfo fileInfo = new FileInfo(files[0]);
+
+                    if (IsFullPathCb.IsChecked != true)
+                    {
+                       
+
+                        PlayListLb.Items.Add(fileInfo.Name);
+
+                        return;
+                    }
+                    PlayListLb.Items.Add(fileInfo.FullName);
+
+
+                }
+            }
+        }
+
+        private void PlayListLb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int indexInLb = PlayListLb.SelectedIndex;
+
+
+            ListBoxItem listBoxItem = (ListBoxItem)PlayListLb.ItemContainerGenerator.ContainerFromIndex(indexInLb);
+
+            foreach(var file in filesList)
+            {
+                var a = Convert.ToString(listBoxItem);
+                var a1 = a;
+
+               
+                if (file.FullName == Convert.ToString(listBoxItem).Replace("System.Windows.Controls.ListBoxItem: ","") || file.Name == Convert.ToString(listBoxItem).Replace("System.Windows.Controls.ListBoxItem: ", ""))
+                {
+                    VideoPlayerMedia.Source = new Uri(file.FullName);
+
+                    VideoPlayerMedia.Play();
+
+
+                   
+
+                    VideoPlayerMedia.Pause();
+
+
+                    break;
+                }
+             
+            }
+            
+        }
     }
 }
