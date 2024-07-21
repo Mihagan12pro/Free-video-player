@@ -20,9 +20,27 @@ namespace Free_video_player
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool isPlay = true;
         public MainWindow()
         {
             InitializeComponent();
+
+
+          
+        }
+
+        private void PauseAndPlayBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (isPlay)
+            {
+                isPlay = false;
+                PauseAndPlayBtn.Content = "||";
+                return;
+            }
+
+            isPlay = true;
+            PauseAndPlayBtn.Content = "▶";
+
         }
     }
 }

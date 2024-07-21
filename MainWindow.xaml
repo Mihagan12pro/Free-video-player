@@ -5,14 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Free_video_player"
         mc:Ignorable="d"
-        Title="Free video player" Height="450" Width="800">
+        Title="Free video player" Height="450" Width="800" MinHeight="350" MinWidth="600">
     <Viewbox>
         <Grid>
+
             <Button Name="SkipBackwardBtn" Content="◄◄" Height="30" Width="30" Margin="320,352,432,20" Background="Gray"></Button>
-            <Button Name="PauseBtn" Content="||" FontWeight="Heavy" Background="Gray" Height="30" Width="30" Margin="380,353,372,19" ></Button>
+            <Button Name="PauseAndPlayBtn" Content="▶" FontWeight="Heavy" Background="Gray" Height="30" Width="30" Margin="380,353,372,19" Click="PauseAndPlayBtn_Click" ></Button>
             <Button Name="SkipForwardBtn" Content="►►" Width="30" Height="30" Background="Gray" Margin="450,353,302,19"></Button>
             <Slider Name="VolumeControlSlr"  Margin="487,355,230,28" ></Slider>
-            <Slider Foreground="AliceBlue" Name="VideoSkipperSlr"  Margin="158,316,156,56" ></Slider>
+            <Slider Foreground="AliceBlue" Name="VideoSkipperSlr"   Margin="158,316,156,56" ></Slider>
+            <MediaElement Name="VideoPlayer"  HorizontalAlignment="Left" Height="260" Margin="166,25,0,0" VerticalAlignment="Top" Width="459"/>
+
         </Grid>
     </Viewbox>
 
