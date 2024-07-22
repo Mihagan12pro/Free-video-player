@@ -14,7 +14,7 @@ namespace Free_video_player
     {
         private static PlayingVideo instance;
 
-        private string videoPath;
+        public string videoPath { get; }
 
         private bool isPause = true;
 
@@ -27,7 +27,7 @@ namespace Free_video_player
         private Slider volumeControl, videoControl;
 
 
-
+        
 
         public static void iElement(UIElement uIElement)
         {
@@ -123,30 +123,32 @@ namespace Free_video_player
 
         public void PauseAndPlay_Click(object sender, RoutedEventArgs e)
         {
-            
 
-           
-
-            Button button = sender as Button;
-
-            if (isPause)
+            if (mediaElement.Source != null)
             {
-                
 
-                button.Content = "▶";
 
-                isPause = false;
+                Button button = sender as Button;
 
-               
+                if (isPause)
+                {
 
-                return;
+
+                    button.Content = "▶";
+
+                    isPause = false;
+
+
+
+                    return;
+                }
+
+                button.Content = "||";
+
+
+
+                isPause = true;
             }
-
-            button.Content = "||";
-
-            
-
-            isPause = true;
 
         }
         public void SkipAndForward_Click(object sender, RoutedEventArgs e)

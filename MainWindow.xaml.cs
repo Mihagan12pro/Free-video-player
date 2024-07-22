@@ -27,6 +27,7 @@ namespace Free_video_player
         private bool isPlay = true;
         private PlayingVideo playingVideo;
 
+        private string[] invalidStringsArray = { "System.Windows.Controls.ListBoxItem: "};
 
 
         private DispatcherTimer timer;
@@ -37,6 +38,7 @@ namespace Free_video_player
             InitializeComponent();
 
             VideoPlayerMedia.LoadedBehavior = MediaState.Manual;
+
             foreach (UIElement el in mainGrid.Children)
             {
 
@@ -76,6 +78,9 @@ namespace Free_video_player
             if (result == true)
             {
                 PlayListLb.Items.Add(openFile.FileName);
+
+
+                
             }
 
         }
@@ -85,6 +90,12 @@ namespace Free_video_player
             if (PlayListLb.SelectedIndex != -1 )
             {
                 playingVideo = PlayingVideo.Instance(Convert.ToString(PlayListLb.ItemContainerGenerator.ContainerFromIndex(PlayListLb.SelectedIndex)), PlayListLb.SelectedIndex);
+
+                VideoPlayerMedia.Source =new Uri(playingVideo.videoPath.Replace(invalidStringsArray[0],"") );
+
+                VideoPlayerMedia.Play();
+
+                VideoPlayerMedia.Stop();
             }
         }
 
