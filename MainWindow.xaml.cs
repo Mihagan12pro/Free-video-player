@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,7 +26,7 @@ namespace Free_video_player
     {
         private bool isPlay = true;
 
-        private List<FileInfo> filesList = new List<FileInfo>();
+       
 
         private DispatcherTimer timer;
 
@@ -35,6 +36,12 @@ namespace Free_video_player
             InitializeComponent();
 
             VideoPlayerMedia.LoadedBehavior = MediaState.Manual;
+            foreach (UIElement el in mainGrid.Children)
+            {
+
+                PlayingVideo.iElement(el);
+
+            }
 
             //this.AllowDrop = true;
             //this.DragEnter += new DragEventHandler(Window_DragEnter);
@@ -51,7 +58,7 @@ namespace Free_video_player
             //VideoPlayerMedia.MediaOpened += VideoPlayerMedia_MediaOpened;
 
 
-           
+
 
 
             //RemoveFromPlayListBtn.Click += RemoveFromPlayListBtn_Click;
@@ -70,6 +77,14 @@ namespace Free_video_player
                 PlayListLb.Items.Add(openFile.FileName);
             }
 
+        }
+
+        private void PlayListLb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (PlayListLb.SelectedIndex != -1 )
+            {
+                PlayingVideo playingVideo = PlayingVideo.Instance(Convert.ToString(PlayListLb.ItemContainerGenerator.ContainerFromIndex(PlayListLb.SelectedIndex)), PlayListLb.SelectedIndex);
+            }
         }
 
         //private void Timer_tick(object sender, EventArgs e)

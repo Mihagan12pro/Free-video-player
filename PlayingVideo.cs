@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,22 +19,59 @@ namespace Free_video_player
 
         private MediaElement mediaElement;
 
-        public static PlayingVideo Instance(string videoPath,MediaElement mediaElement)
+        private static int indexInLb = -1;
+
+        private static List<UIElement>UIElementsList = new List<UIElement> ();
+
+        public static void iElement(UIElement uIElement)
+        {
+            UIElementsList.Add(uIElement);
+        }
+
+        public static PlayingVideo Instance(string videoPath,int index)
         {
             if (instance == null)
             {
-                instance = new PlayingVideo(videoPath,mediaElement);
+                instance = new PlayingVideo(videoPath);
             }
 
+            if (index != indexInLb)
+            {
+                instance = null;
+
+                indexInLb = index;
+
+                instance = new PlayingVideo(videoPath);
+            }
 
 
             return instance;
         }
 
-        private PlayingVideo(string videoPath, MediaElement mediaElement)
+        private PlayingVideo(string videoPath)
         {
             this.videoPath = videoPath;
-            this.mediaElement = mediaElement;
+            this.mediaElement = mediaElement; 
+
+
+
+
+            foreach(var ui in UIElementsList)
+            {
+                if (ui is Button)
+                {
+                    Button button = (Button) ui;
+
+                    switch(button.Content)
+                    {
+                        case "▶":
+
+                            button.Click += PauseAndPlay;
+
+                            break;
+                    }
+                }
+            }
         }
 
         public void PauseAndPlay(object sender, RoutedEventArgs e)
@@ -48,14 +86,14 @@ namespace Free_video_player
 
                 isPause = false;
 
-                mediaElement.Play();
+               
 
                 return;
             }
 
             button.Content = "||";
 
-            mediaElement.Pause();
+            
 
             isPause = true;
 
