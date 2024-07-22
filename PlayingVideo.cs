@@ -134,18 +134,18 @@ namespace Free_video_player
                 {
 
 
-                    button.Content = "▶";
+                    button.Content = "||";
 
                     isPause = false;
 
-
+                    mediaElement.Play();
 
                     return;
                 }
 
-                button.Content = "||";
+                button.Content = "▶";
 
-
+                mediaElement.Pause();
 
                 isPause = true;
             }
