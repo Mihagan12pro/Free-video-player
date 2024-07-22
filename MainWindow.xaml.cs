@@ -36,291 +36,316 @@ namespace Free_video_player
 
             VideoPlayerMedia.LoadedBehavior = MediaState.Manual;
 
-            this.AllowDrop = true;
-            this.DragEnter += new DragEventHandler(Window_DragEnter);
-            this.Drop += new DragEventHandler(Window_Drop);
+            //this.AllowDrop = true;
+            //this.DragEnter += new DragEventHandler(Window_DragEnter);
+            //this.Drop += new DragEventHandler(Window_Drop);
 
-            timer = new DispatcherTimer();
+            //timer = new DispatcherTimer();
 
-            timer.Interval = TimeSpan.FromMilliseconds(500);
+            //timer.Interval = TimeSpan.FromMilliseconds(500);
 
-            timer.Tick += new EventHandler(Timer_tick);
+            //timer.Tick += new EventHandler(Timer_tick);
 
-            timer.Start(); // Запуск таймера
+            //timer.Start(); // Запуск таймера
 
-            VideoPlayerMedia.MediaOpened += VideoPlayerMedia_MediaOpened;
+            //VideoPlayerMedia.MediaOpened += VideoPlayerMedia_MediaOpened;
+
+
+           
 
 
             //RemoveFromPlayListBtn.Click += RemoveFromPlayListBtn_Click;
         }
 
-        private void Timer_tick(object sender, EventArgs e)
+        private void AddToPlayListBtn_Click(object sender, RoutedEventArgs e)
         {
-            VideoSkipperSlr.Value = VideoPlayerMedia.Position.TotalSeconds;
-        }
-        private void VideoPlayerMedia_MediaOpened(object sender, RoutedEventArgs e)
-        {
-            if (VideoPlayerMedia.NaturalDuration.HasTimeSpan)
+            OpenFileDialog openFile = new OpenFileDialog();
+
+            openFile.Filter = "Video files (*.mp4;*.avi;*.mkv)|*.mp4;*.avi;*.mkv|All files (*.*)|*.*";
+
+            bool? result = openFile.ShowDialog();
+
+            if (result == true)
             {
-                VideoSkipperSlr.Maximum = VideoPlayerMedia.NaturalDuration.TimeSpan.TotalSeconds;
-            }
-        }
-        private void PauseAndPlayBtn_Click(object sender, RoutedEventArgs e)
-        {
-        
-
-
-
-            if (isPlay)
-            {
-                isPlay = false;
-                PauseAndPlayBtn.Content = "▶";
-
-                VideoPlayerMedia.Pause();
-                return;
+                PlayListLb.Items.Add(openFile.FileName);
             }
 
- 
-
-
-
-            VideoPlayerMedia.Play();
-            isPlay = true;
-            PauseAndPlayBtn.Content = "||";
-
         }
 
+        //private void Timer_tick(object sender, EventArgs e)
+        //{
+        //    VideoSkipperSlr.Value = VideoPlayerMedia.Position.TotalSeconds;
+        //}
+        //private void VideoPlayerMedia_MediaOpened(object sender, RoutedEventArgs e)
+        //{
+        //    if (VideoPlayerMedia.NaturalDuration.HasTimeSpan)
+        //    {
+        //        VideoSkipperSlr.Maximum = VideoPlayerMedia.NaturalDuration.TimeSpan.TotalSeconds;
+        //    }
+        //}
+        //private void PauseAndPlayBtn_Click(object sender, RoutedEventArgs e)
+        //{
 
+        //    if (VideoPlayerMedia.Source != null)
+        //    {
 
 
+        //        if (isPlay)
+        //        {
+        //            isPlay = false;
+        //            PauseAndPlayBtn.Content = "▶";
 
+        //            VideoPlayerMedia.Pause();
+        //            return;
+        //        }
 
-        private void VideoSkipperSlr_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            VideoPlayerMedia.Position = TimeSpan.FromSeconds(VideoSkipperSlr.Value);
-        }
 
 
 
 
+        //        VideoPlayerMedia.Play();
+        //        isPlay = true;
+        //        PauseAndPlayBtn.Content = "||";
+        //    }
+        //}
 
-        private void VolumeControlSlr_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-           VideoPlayerMedia.Volume = (double)VolumeControlSlr.Value;
-        }
 
 
 
 
 
-        private void SkipBackwardBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (VideoPlayerMedia.Position >= TimeSpan.FromSeconds(5))
-                 VideoPlayerMedia.Position -= TimeSpan.FromSeconds(5);
-        }
+        //private void VideoSkipperSlr_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        //{
+        //    VideoPlayerMedia.Position = TimeSpan.FromSeconds(VideoSkipperSlr.Value);
+        //}
 
 
 
 
 
+        //private void VolumeControlSlr_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        //{
+        //   VideoPlayerMedia.Volume = (double)VolumeControlSlr.Value;
+        //}
 
 
 
-        private void SkipForwardBtn_Click(object sender, RoutedEventArgs e)
-        {
-            VideoPlayerMedia.Position += TimeSpan.FromSeconds(5);
 
 
+        //private void SkipBackwardBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (VideoPlayerMedia.Position >= TimeSpan.FromSeconds(5))
+        //         VideoPlayerMedia.Position -= TimeSpan.FromSeconds(5);
+        //}
 
-        }
 
 
 
 
 
 
-        private void AddToPlayList_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Video files (*.mp4;*.avi;*.mkv)|*.mp4;*.avi;*.mkv|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                VideoPlayerMedia.Source = new Uri(openFileDialog.FileName);
 
-                FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
+        //private void SkipForwardBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    VideoPlayerMedia.Position += TimeSpan.FromSeconds(5);
 
 
-                filesList.Add(fileInfo);
 
-                if (IsFullPathCb.IsChecked == true)
-                {
+        //}
 
-                    PlayListLb.Items.Add(fileInfo.FullName);
-                    return;
-                }
 
-                PlayListLb.Items.Add(fileInfo.Name);
-                //VideoPlayerMedia.Play();
-                //isPlay = true;
-                //PauseAndPlayBtn.Content = "||";
-            }
-        }
 
 
 
 
+        //private void AddToPlayList_Click(object sender, RoutedEventArgs e)
+        //{
+        //    OpenFileDialog openFileDialog = new OpenFileDialog();
+        //    openFileDialog.Filter = "Video files (*.mp4;*.avi;*.mkv)|*.mp4;*.avi;*.mkv|All files (*.*)|*.*";
+        //    if (openFileDialog.ShowDialog() == true)
+        //    {
+        //        VideoPlayerMedia.Source = new Uri(openFileDialog.FileName);
 
 
 
-        private void Window_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effects = DragDropEffects.Copy;
-            }
-            else
-            {
-                e.Effects = DragDropEffects.None;
-            }
-        }
+        //        FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
 
 
+        //        filesList.Add(fileInfo);
 
+        //        if (IsFullPathCb.IsChecked == true)
+        //        {
 
+        //            PlayListLb.Items.Add(fileInfo.FullName);
+        //            return;
+        //        }
 
+        //        PlayListLb.Items.Add(fileInfo.Name);
+        //        //VideoPlayerMedia.Play();
+        //        //isPlay = true;
+        //        //PauseAndPlayBtn.Content = "||";
+        //    }
+        //}
 
-        private void Window_Drop(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (files.Length > 0)
-                {
-                    VideoPlayerMedia.Source = new Uri(files[0]);
-                    VideoPlayerMedia.Play();
 
 
 
-                    VideoPlayerMedia.Pause();
-              
 
-                    FileInfo fileInfo = new FileInfo(files[0]);
 
-                    filesList.Add(fileInfo);
 
-                    if (IsFullPathCb.IsChecked != true)
-                    {
-                       
+        //private void Window_DragEnter(object sender, DragEventArgs e)
+        //{
+        //    if (e.Data.GetDataPresent(DataFormats.FileDrop))
+        //    {
+        //        e.Effects = DragDropEffects.Copy;
+        //    }
+        //    else
+        //    {
+        //        e.Effects = DragDropEffects.None;
+        //    }
+        //}
 
-                        PlayListLb.Items.Add(fileInfo.Name);
 
-                        return;
-                    }
-                    PlayListLb.Items.Add(fileInfo.FullName);
 
-                    
 
-                }
-            }
-        }
 
 
+        //private void Window_Drop(object sender, DragEventArgs e)
+        //{
+        //    if (e.Data.GetDataPresent(DataFormats.FileDrop))
+        //    {
+        //        string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+        //        if (files.Length > 0)
+        //        {
+        //            VideoPlayerMedia.Source = new Uri(files[0]);
+        //            VideoPlayerMedia.Play();
 
 
 
+        //            VideoPlayerMedia.Pause();
 
-        private void PlayListLb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            int indexInLb = PlayListLb.SelectedIndex;
 
-            
+        //            FileInfo fileInfo = new FileInfo(files[0]);
 
-            ListBoxItem listBoxItem = (ListBoxItem)PlayListLb.ItemContainerGenerator.ContainerFromIndex(indexInLb);
+        //            filesList.Add(fileInfo);
 
-            foreach(var file in filesList)
-            {
-                
+        //            if (IsFullPathCb.IsChecked != true)
+        //            {
 
-               
-                if (file.FullName == Convert.ToString(listBoxItem).Replace("System.Windows.Controls.ListBoxItem: ","") || file.Name == Convert.ToString(listBoxItem).Replace("System.Windows.Controls.ListBoxItem: ", ""))
-                {
-                    VideoPlayerMedia.Source = new Uri(file.FullName);
 
-                    VideoPlayerMedia.Play();
+        //                PlayListLb.Items.Add(fileInfo.Name);
 
+        //                return;
+        //            }
+        //            PlayListLb.Items.Add(fileInfo.FullName);
 
-                   
 
-                    VideoPlayerMedia.Pause();
 
+        //        }
+        //    }
+        //}
 
-                    break;
-                }
-             
-            }
-            
-        }
 
 
 
 
 
+        //private void PlayListLb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    int indexInLb = PlayListLb.SelectedIndex;
 
-        private void VideoPlayer_PositionChanged(object sender, RoutedPropertyChangedEventArgs<TimeSpan> e)
-        {
-        
-                VideoSkipperSlr.Value = e.NewValue.TotalSeconds;
-            
-        }
 
 
+        //    ListBoxItem listBoxItem = (ListBoxItem)PlayListLb.ItemContainerGenerator.ContainerFromIndex(indexInLb);
 
+        //    foreach(var file in filesList)
+        //    {
 
 
 
-        private void RemoveFromPlayListBtn_Click(object sender, RoutedEventArgs e)
-        {
-            int indexInLb = PlayListLb.SelectedIndex;
+        //        if (file.FullName == Convert.ToString(listBoxItem).Replace("System.Windows.Controls.ListBoxItem: ","") || file.Name == Convert.ToString(listBoxItem).Replace("System.Windows.Controls.ListBoxItem: ", ""))
+        //        {
+        //            VideoPlayerMedia.Source = new Uri(file.FullName);
 
-            if (indexInLb >= 0)
-            {
+        //            VideoPlayerMedia.Play();
 
-                ListBoxItem listBoxItem = (ListBoxItem)PlayListLb.ItemContainerGenerator.ContainerFromIndex(indexInLb);
 
-                string itemString = Convert.ToString(listBoxItem).Replace("System.Windows.Controls.ListBoxItem: ", "");
 
-                foreach (var file in filesList)
-                {
-                    if (file.Name == itemString)
-                    {
-                        filesList.Remove(file);
 
-                        if (VideoPlayerMedia.Source == new Uri(file.FullName))
-                        {
-                            ClearVideoPlayer();
-                        }
+        //            VideoPlayerMedia.Pause();
 
-                        break;
-                    }
-                }
 
+        //            break;
+        //        }
 
+        //    }
 
-                PlayListLb.Items.RemoveAt(indexInLb);
-            }
-        }
+        //}
 
 
 
 
 
-        private void ClearVideoPlayer()
-        {
-            VideoPlayerMedia.Stop();
-            VideoPlayerMedia.Source = null; 
-            VideoPlayerMedia.Close(); 
-            VideoSkipperSlr.Value = 0; 
-        }
+
+        //private void VideoPlayer_PositionChanged(object sender, RoutedPropertyChangedEventArgs<TimeSpan> e)
+        //{
+
+        //        VideoSkipperSlr.Value = e.NewValue.TotalSeconds;
+
+        //}
+
+
+
+
+
+
+        //private void RemoveFromPlayListBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    int indexInLb = PlayListLb.SelectedIndex;
+
+        //    if (indexInLb >= 0)
+        //    {
+
+        //        ListBoxItem listBoxItem = (ListBoxItem)PlayListLb.ItemContainerGenerator.ContainerFromIndex(indexInLb);
+
+        //        string itemString = Convert.ToString(listBoxItem).Replace("System.Windows.Controls.ListBoxItem: ", "");
+
+        //        foreach (var file in filesList)
+        //        {
+        //            if (file.Name == itemString)
+        //            {
+        //                filesList.Remove(file);
+
+        //                if (VideoPlayerMedia.Source == new Uri(file.FullName))
+        //                {
+        //                    ClearVideoPlayer();
+
+        //                    isPlay = false;
+
+        //                    PauseAndPlayBtn.Content = "▶";
+        //                }
+
+        //                break;
+        //            }
+        //        }
+
+
+
+        //        PlayListLb.Items.RemoveAt(indexInLb);
+        //    }
+        //}
+
+
+
+
+
+        //private void ClearVideoPlayer()
+        //{
+        //    VideoPlayerMedia.Stop();
+        //    VideoPlayerMedia.Source = null; 
+        //    VideoPlayerMedia.Close(); 
+        //    VideoSkipperSlr.Value = 0; 
+        //}
 
 
     }
