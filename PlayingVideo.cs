@@ -24,12 +24,18 @@ namespace Free_video_player
 
         private static List<UIElement>UIElementsList = new List<UIElement> ();
 
+        private Slider volumeControl, videoControl;
+
+
 
 
         public static void iElement(UIElement uIElement)
         {
             UIElementsList.Add(uIElement);
         }
+
+
+
 
         public static PlayingVideo Instance(string videoPath,int index)
         {
@@ -51,6 +57,9 @@ namespace Free_video_player
             return instance;
         }
 
+
+
+
         private PlayingVideo(string videoPath)
         {
             this.videoPath = videoPath;
@@ -69,13 +78,13 @@ namespace Free_video_player
                     {
                         case "▶":
 
-                            button.Click += PauseAndPlay;
+                            button.Click += PauseAndPlay_Click;
 
                             break;
                         case "►►":
                         case "◄◄":
 
-                            button.Click += SkipAndForward;
+                            button.Click += SkipAndForward_Click;
 
                             break;
                     }
@@ -85,12 +94,34 @@ namespace Free_video_player
                 {
                     mediaElement =(MediaElement)ui;
                 }
-               
+               if (ui is Slider)
+               {
+                    var slider = (Slider)ui;
+
+                    slider.IsEnabled = true;
+
+                    if (slider.Name == "VolumeControlSlr")
+                    {
+                        volumeControl = slider;
+
+                        volumeControl.ValueChanged += VolumeSlider_Change;
+
+
+                    }
+                    else
+                    {
+                        videoControl = slider;
+
+                        videoControl.ValueChanged += VideoSlider_Change;
+                    }
+
+
+               }
 
             }
         }
 
-        public void PauseAndPlay(object sender, RoutedEventArgs e)
+        public void PauseAndPlay_Click(object sender, RoutedEventArgs e)
         {
             
 
@@ -118,7 +149,7 @@ namespace Free_video_player
             isPause = true;
 
         }
-        public void SkipAndForward(object sender, RoutedEventArgs e)
+        public void SkipAndForward_Click(object sender, RoutedEventArgs e)
         {
             
 
@@ -133,6 +164,18 @@ namespace Free_video_player
             }
              
             
+        }
+        
+
+        public void VolumeSlider_Change(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        public void VideoSlider_Change(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
