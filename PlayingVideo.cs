@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace Free_video_player
 {
@@ -22,6 +23,8 @@ namespace Free_video_player
         private static int indexInLb = -1;
 
         private static List<UIElement>UIElementsList = new List<UIElement> ();
+
+
 
         public static void iElement(UIElement uIElement)
         {
@@ -69,13 +72,30 @@ namespace Free_video_player
                             button.Click += PauseAndPlay;
 
                             break;
+                        case "►►":
+                        case "◄◄":
+
+                            button.Click += SkipAndForward;
+
+                            break;
                     }
                 }
+                
+                if (ui is MediaElement)
+                {
+                    mediaElement =(MediaElement)ui;
+                }
+               
+
             }
         }
 
         public void PauseAndPlay(object sender, RoutedEventArgs e)
         {
+            
+
+           
+
             Button button = sender as Button;
 
             if (isPause)
@@ -97,6 +117,22 @@ namespace Free_video_player
 
             isPause = true;
 
+        }
+        public void SkipAndForward(object sender, RoutedEventArgs e)
+        {
+            
+
+            Button button = sender as Button;
+
+            switch(button.Content)
+            {
+                case "►►":
+                    break;
+                default:
+                    break;
+            }
+             
+            
         }
     }
 }

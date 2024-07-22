@@ -25,8 +25,9 @@ namespace Free_video_player
     public partial class MainWindow : Window
     {
         private bool isPlay = true;
+        private PlayingVideo playingVideo;
 
-       
+
 
         private DispatcherTimer timer;
 
@@ -83,7 +84,7 @@ namespace Free_video_player
         {
             if (PlayListLb.SelectedIndex != -1 )
             {
-                PlayingVideo playingVideo = PlayingVideo.Instance(Convert.ToString(PlayListLb.ItemContainerGenerator.ContainerFromIndex(PlayListLb.SelectedIndex)), PlayListLb.SelectedIndex);
+                playingVideo = PlayingVideo.Instance(Convert.ToString(PlayListLb.ItemContainerGenerator.ContainerFromIndex(PlayListLb.SelectedIndex)), PlayListLb.SelectedIndex);
             }
         }
 
