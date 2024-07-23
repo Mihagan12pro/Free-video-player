@@ -13,7 +13,7 @@
             <Button Name="PauseAndPlayBtn" Content="▶" FontWeight="Heavy" Background="Gray" Height="30" Width="30" Margin="380,353,372,19"  ></Button>
             <Button Name="SkipForwardBtn"   Content="►►" Width="30" Height="30" Background="Gray" Margin="450,353,302,19"></Button>
             <Slider Name="VolumeControlSlr" IsEnabled="False"  Margin="487,355,230,28" ></Slider>
-            <Slider Foreground="AliceBlue" IsEnabled="False" Name="VideoSkipperSlr"   Margin="158,316,156,56"></Slider>
+            <Slider Foreground="AliceBlue" IsEnabled="False" Name="VideoControlSlr"   Margin="158,316,156,56"></Slider>
             <MediaElement Name="VideoPlayerMedia"  HorizontalAlignment="Left" Height="260" Margin="166,25,0,0" VerticalAlignment="Top" Width="459"/>
 
             <Canvas>

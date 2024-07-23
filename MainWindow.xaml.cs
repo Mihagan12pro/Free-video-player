@@ -45,7 +45,11 @@ namespace Free_video_player
                 PlayingVideo.iElement(el);
 
             }
+            timer = new DispatcherTimer();
 
+            timer.Interval = TimeSpan.FromMilliseconds(500);
+
+            timer.Tick += new EventHandler(Timer_tick);
             //this.AllowDrop = true;
             //this.DragEnter += new DragEventHandler(Window_DragEnter);
             //this.Drop += new DragEventHandler(Window_Drop);
@@ -67,6 +71,13 @@ namespace Free_video_player
             //RemoveFromPlayListBtn.Click += RemoveFromPlayListBtn_Click;
         }
 
+        private void Timer_tick(object sender, EventArgs e)
+        {
+            VideoControlSlr.Value = VideoPlayerMedia.Position.TotalSeconds;
+
+        }
+
+
         private void AddToPlayListBtn_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
@@ -78,9 +89,10 @@ namespace Free_video_player
             if (result == true)
             {
                 PlayListLb.Items.Add(openFile.FileName);
+               
 
 
-                
+
             }
 
         }
@@ -135,7 +147,6 @@ namespace Free_video_player
         //        PauseAndPlayBtn.Content = "||";
         //    }
         //}
-
 
 
 

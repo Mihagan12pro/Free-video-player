@@ -177,7 +177,7 @@ namespace Free_video_player
 
         public void VideoSlider_Change(object sender, RoutedEventArgs e)
         {
-
+            mediaElement.Position = TimeSpan.FromSeconds(videoControl.Value);
         }
     }
 }
