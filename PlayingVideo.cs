@@ -102,7 +102,7 @@ namespace Free_video_player
                     mediaElement.Volume = 0;
 
 
-
+                    mediaElement.MediaEnded += MediaElement_MediaEnded;
                 }
                if (ui is Slider)
                {
@@ -140,9 +140,16 @@ namespace Free_video_player
 
             if (mediaElement.Source != null)
             {
+                
 
 
                 Button button = sender as Button;
+
+                if(mediaElement.Position.TotalSeconds == videoDuration)
+                {
+                    mediaElement.Position= TimeSpan.FromSeconds(0);
+                }
+
 
                 if (isPause)
                 {
@@ -208,6 +215,12 @@ namespace Free_video_player
         private void VideoSlider_Change(object sender, RoutedEventArgs e)
         {
             mediaElement.Position = TimeSpan.FromSeconds(videoControl.Value);
+        }
+        private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            isPause = true;
+            pauseAndPlay.Content = "▶";
+            volumeControl.Value = 0;
         }
 
 

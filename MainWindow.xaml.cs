@@ -54,6 +54,9 @@ namespace Free_video_player
             timer.Start();
 
             VideoPlayerMedia.MediaOpened += VideoPlayerMedia_MediaOpened;
+
+
+           
         }
 
 
@@ -63,6 +66,10 @@ namespace Free_video_player
             VideoControlSlr.Value = VideoPlayerMedia.Position.TotalSeconds;
 
         }
+
+        
+
+
         private void VideoPlayerMedia_MediaOpened(object sender, RoutedEventArgs e)
         {
             if (VideoPlayerMedia.NaturalDuration.HasTimeSpan)
