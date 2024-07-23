@@ -26,7 +26,7 @@ namespace Free_video_player
 
         private Slider volumeControl, videoControl;
 
-
+        private static Button pauseAndPlay;
         
 
         public static void iElement(UIElement uIElement)
@@ -46,7 +46,7 @@ namespace Free_video_player
 
             if (index != indexInLb)
             {
-                instance = null;
+                instance = DestructInstance();
 
                 indexInLb = index;
 
@@ -77,6 +77,8 @@ namespace Free_video_player
                     switch(button.Content)
                     {
                         case "▶":
+
+                            pauseAndPlay = button;
 
                             button.Click += PauseAndPlay_Click;
 
@@ -178,6 +180,14 @@ namespace Free_video_player
         public void VideoSlider_Change(object sender, RoutedEventArgs e)
         {
             mediaElement.Position = TimeSpan.FromSeconds(videoControl.Value);
+        }
+
+
+        private static PlayingVideo DestructInstance()
+        {
+            pauseAndPlay.Content = "▶";  
+
+            return null;
         }
     }
 }
