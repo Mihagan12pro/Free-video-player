@@ -50,25 +50,7 @@ namespace Free_video_player
             timer.Interval = TimeSpan.FromMilliseconds(500);
 
             timer.Tick += new EventHandler(Timer_tick);
-            //this.AllowDrop = true;
-            //this.DragEnter += new DragEventHandler(Window_DragEnter);
-            //this.Drop += new DragEventHandler(Window_Drop);
-
-            //timer = new DispatcherTimer();
-
-            //timer.Interval = TimeSpan.FromMilliseconds(500);
-
-            //timer.Tick += new EventHandler(Timer_tick);
-
-            //timer.Start(); // Запуск таймера
-
-            //VideoPlayerMedia.MediaOpened += VideoPlayerMedia_MediaOpened;
-
-
-
-
-
-            //RemoveFromPlayListBtn.Click += RemoveFromPlayListBtn_Click;
+            
         }
 
         private void Timer_tick(object sender, EventArgs e)

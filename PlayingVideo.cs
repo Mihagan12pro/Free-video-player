@@ -162,8 +162,24 @@ namespace Free_video_player
             switch(button.Content)
             {
                 case "►►":
+
+                    var videoDurationTimeSpan =(mediaElement.NaturalDuration.TimeSpan);
+
+                    double videoDuration = videoDurationTimeSpan.TotalSeconds;
+
+                    if(mediaElement.Position.TotalSeconds + 5 <= videoDuration)
+                    {
+                        mediaElement.Position = TimeSpan.FromSeconds(mediaElement.Position.TotalSeconds + 5);
+                    }
+
                     break;
                 default:
+
+                    if(mediaElement.Position.TotalSeconds - 5 >= 0)
+                    {
+                        mediaElement.Position = TimeSpan.FromSeconds(mediaElement.Position.TotalSeconds - 5);
+                    }
+
                     break;
             }
              
