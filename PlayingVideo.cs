@@ -95,6 +95,8 @@ namespace Free_video_player
                 if (ui is MediaElement)
                 {
                     mediaElement =(MediaElement)ui;
+
+                    mediaElement.Volume = 0;
                 }
                if (ui is Slider)
                {
@@ -189,7 +191,7 @@ namespace Free_video_player
 
         public void VolumeSlider_Change(object sender, RoutedEventArgs e)
         {
-
+            mediaElement.Volume = volumeControl.Value;
         }
 
 
