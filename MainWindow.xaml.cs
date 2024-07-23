@@ -47,16 +47,28 @@ namespace Free_video_player
             }
             timer = new DispatcherTimer();
 
-            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Interval = TimeSpan.FromMilliseconds(100);
 
             timer.Tick += new EventHandler(Timer_tick);
-            
+
+            timer.Start();
+
+            VideoPlayerMedia.MediaOpened += VideoPlayerMedia_MediaOpened;
         }
+
+
 
         private void Timer_tick(object sender, EventArgs e)
         {
             VideoControlSlr.Value = VideoPlayerMedia.Position.TotalSeconds;
 
+        }
+        private void VideoPlayerMedia_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            if (VideoPlayerMedia.NaturalDuration.HasTimeSpan)
+            {
+                VideoControlSlr.Maximum = VideoPlayerMedia.NaturalDuration.TimeSpan.TotalSeconds;
+            }
         }
 
 
@@ -91,6 +103,11 @@ namespace Free_video_player
 
                 VideoPlayerMedia.Stop();
             }
+        }
+
+        private void RemoveFromPlayListBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         //private void Timer_tick(object sender, EventArgs e)

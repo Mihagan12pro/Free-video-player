@@ -27,7 +27,10 @@ namespace Free_video_player
         private Slider volumeControl, videoControl;
 
         private static Button pauseAndPlay;
-        
+
+        private double videoDuration; 
+
+
 
         public static void iElement(UIElement uIElement)
         {
@@ -97,6 +100,9 @@ namespace Free_video_player
                     mediaElement =(MediaElement)ui;
 
                     mediaElement.Volume = 0;
+
+
+
                 }
                if (ui is Slider)
                {
@@ -123,9 +129,13 @@ namespace Free_video_player
                }
 
             }
+   
+
+
+
         }
 
-        public void PauseAndPlay_Click(object sender, RoutedEventArgs e)
+        private void PauseAndPlay_Click(object sender, RoutedEventArgs e)
         {
 
             if (mediaElement.Source != null)
@@ -136,7 +146,7 @@ namespace Free_video_player
 
                 if (isPause)
                 {
-
+                    videoDuration = mediaElement.NaturalDuration.TimeSpan.TotalSeconds;
 
                     button.Content = "||";
 
@@ -155,7 +165,7 @@ namespace Free_video_player
             }
 
         }
-        public void SkipAndForward_Click(object sender, RoutedEventArgs e)
+        private void SkipAndForward_Click(object sender, RoutedEventArgs e)
         {
             
 
@@ -189,19 +199,19 @@ namespace Free_video_player
         }
         
 
-        public void VolumeSlider_Change(object sender, RoutedEventArgs e)
+        private void VolumeSlider_Change(object sender, RoutedEventArgs e)
         {
             mediaElement.Volume = volumeControl.Value;
         }
 
 
-        public void VideoSlider_Change(object sender, RoutedEventArgs e)
+        private void VideoSlider_Change(object sender, RoutedEventArgs e)
         {
             mediaElement.Position = TimeSpan.FromSeconds(videoControl.Value);
         }
 
 
-        private static PlayingVideo DestructInstance()
+        public static PlayingVideo DestructInstance()
         {
             pauseAndPlay.Content = "▶";  
 
