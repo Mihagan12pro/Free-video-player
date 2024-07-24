@@ -56,7 +56,7 @@ namespace Free_video_player
             VideoPlayerMedia.MediaOpened += VideoPlayerMedia_MediaOpened;
 
 
-           
+            ClearVideoListBtn.Click += ClearVideoListBtn_Click;
         }
 
 
@@ -131,6 +131,27 @@ namespace Free_video_player
 
 
            
+        }
+
+        private void ClearVideoListBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (playingVideo != null)
+            {
+                foreach (var item in PlayListLb.Items)
+                {
+
+
+
+                    if (Convert.ToString(playingVideo.videoPath.Replace("System.Windows.Controls.ListBoxItem: ", "")) == Convert.ToString(item))
+                    {
+                        playingVideo = playingVideo.DestructInstance();
+                        break;
+                    }
+
+
+                }
+            }
+            PlayListLb.Items.Clear();
         }
 
         //private void Timer_tick(object sender, EventArgs e)
