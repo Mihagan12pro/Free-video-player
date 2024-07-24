@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,17 +17,19 @@ namespace Free_video_player
 
         public string videoPath { get; }
 
-        private bool isPause = true;
+        private  bool isPause = true;
 
-        private MediaElement mediaElement;
+        private  MediaElement mediaElement;
 
         private static int indexInLb = -1;
 
         private static List<UIElement>UIElementsList = new List<UIElement> ();
 
-        private Slider volumeControl, videoControl;
+        private   Slider volumeControl, videoControl;
 
-        private static Button pauseAndPlay;
+        private  Button pauseAndPlay,skipForward,skipBackward;
+
+       
 
         private double videoDuration; 
 
@@ -45,19 +48,25 @@ namespace Free_video_player
             if (instance == null)
             {
                 instance = new PlayingVideo(videoPath);
+                return instance;
             }
 
-            if (index != indexInLb)
-            {
-                instance = DestructInstance();
+            
+               
+                    instance = instance.DestructInstance();
 
-                indexInLb = index;
+                    indexInLb = index;
 
-                instance = new PlayingVideo(videoPath);
-            }
+                    instance = new PlayingVideo(videoPath);
+
+                    return instance;
+                
+               
+            
 
 
-            return instance;
+
+         
         }
 
 
@@ -66,7 +75,7 @@ namespace Free_video_player
         private PlayingVideo(string videoPath)
         {
             this.videoPath = videoPath;
-            this.mediaElement = mediaElement; 
+           
 
 
 
@@ -83,14 +92,30 @@ namespace Free_video_player
 
                             pauseAndPlay = button;
 
-                            button.Click += PauseAndPlay_Click;
+                            button.Click += this.PauseAndPlay_Click;
 
                             break;
                         case "►►":
                         case "◄◄":
+                            /*
+                             * Content="◄◄" Height="30" Width="30" Margin="320,352,432,20" Background="Gray"></Button>
+            <Button Name="PauseAndPlayBtn" Content="▶" FontWeight="Heavy" Background="Gray" Height="30" Width="30" Margin="380,353,372,19"  ></Button>
+            <Button Name="SkipForwardBtn"   Content="►►" W
+                             */
 
-                            button.Click += SkipAndForward_Click;
+                            button.Click += this.SkipAndForward_Click;
 
+                            if (button.Name == "SkipForwardBtn")
+                            {
+
+                           
+                                skipForward = button;
+                            }
+                            else
+                            {
+
+                                skipBackward = button;
+                            }
                             break;
                     }
                 }
@@ -102,7 +127,7 @@ namespace Free_video_player
                     mediaElement.Volume = 0;
 
 
-                    mediaElement.MediaEnded += MediaElement_MediaEnded;
+                    mediaElement.MediaEnded += this.MediaElement_MediaEnded;
                 }
                if (ui is Slider)
                {
@@ -114,7 +139,7 @@ namespace Free_video_player
                     {
                         volumeControl = slider;
 
-                        volumeControl.ValueChanged += VolumeSlider_Change;
+                        volumeControl.ValueChanged += this.VolumeSlider_Change;
 
 
                     }
@@ -122,7 +147,7 @@ namespace Free_video_player
                     {
                         videoControl = slider;
 
-                        videoControl.ValueChanged += VideoSlider_Change;
+                        videoControl.ValueChanged += this.VideoSlider_Change;
                     }
 
 
@@ -135,7 +160,7 @@ namespace Free_video_player
 
         }
 
-        private void PauseAndPlay_Click(object sender, RoutedEventArgs e)
+        private  void PauseAndPlay_Click(object sender, RoutedEventArgs e)
         {
 
             if (mediaElement.Source != null)
@@ -172,7 +197,7 @@ namespace Free_video_player
             }
 
         }
-        private void SkipAndForward_Click(object sender, RoutedEventArgs e)
+        private  void SkipAndForward_Click(object sender, RoutedEventArgs e)
         {
             
 
@@ -206,13 +231,13 @@ namespace Free_video_player
         }
         
 
-        private void VolumeSlider_Change(object sender, RoutedEventArgs e)
+        private   void VolumeSlider_Change(object sender, RoutedEventArgs e)
         {
             mediaElement.Volume = volumeControl.Value;
         }
 
 
-        private void VideoSlider_Change(object sender, RoutedEventArgs e)
+        private  void VideoSlider_Change(object sender, RoutedEventArgs e)
         {
             mediaElement.Position = TimeSpan.FromSeconds(videoControl.Value);
         }
@@ -224,11 +249,34 @@ namespace Free_video_player
         }
 
 
-        public static PlayingVideo DestructInstance()
+        public  PlayingVideo DestructInstance()
         {
-            pauseAndPlay.Content = "▶";  
+            isPause = true;
+            pauseAndPlay.Content = "▶";
+
+            mediaElement.Stop();
+            mediaElement.Source = null;
+            mediaElement.Close();
+
+            instance.pauseAndPlay.Click -= instance.PauseAndPlay_Click;
+            instance.skipBackward.Click -= instance.SkipAndForward_Click;
+            instance.skipForward.Click -= instance.SkipAndForward_Click;
+
+            instance.volumeControl.IsEnabled = false;
+            instance.volumeControl.Value = 0;
+            instance.volumeControl.ValueChanged -= instance.VolumeSlider_Change;
+
+            instance.videoControl.IsEnabled = false;
+            instance.videoControl.Value = 0;
+            instance.videoControl.ValueChanged -= instance.VideoSlider_Change;
+
+           
+
 
             return null;
         }
+
+
+       
     }
 }

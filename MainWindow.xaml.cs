@@ -102,6 +102,11 @@ namespace Free_video_player
         {
             if (PlayListLb.SelectedIndex != -1 )
             {
+                if (playingVideo != null)
+                {
+                    playingVideo = playingVideo.DestructInstance();
+                }
+
                 playingVideo = PlayingVideo.Instance(Convert.ToString(PlayListLb.ItemContainerGenerator.ContainerFromIndex(PlayListLb.SelectedIndex)), PlayListLb.SelectedIndex);
 
                 VideoPlayerMedia.Source =new Uri(playingVideo.videoPath.Replace(invalidStringsArray[0],"") );
@@ -114,7 +119,18 @@ namespace Free_video_player
 
         private void RemoveFromPlayListBtn_Click(object sender, RoutedEventArgs e)
         {
+            var selectedItem = PlayListLb.SelectedItem;
 
+           
+
+            playingVideo = playingVideo.DestructInstance();
+
+            var a = playingVideo;
+
+            PlayListLb.Items.Remove(selectedItem);
+
+
+           
         }
 
         //private void Timer_tick(object sender, EventArgs e)
