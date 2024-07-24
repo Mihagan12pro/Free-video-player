@@ -24,7 +24,7 @@
                 <Button Name="AddToPlayListBtn" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Canvas.Left="651" Canvas.Top="178" Click="AddToPlayListBtn_Click"/>
                 <Button x:Name="RemoveFromPlayListBtn" Content="Remove" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Canvas.Left="712" Canvas.Top="178" Click="RemoveFromPlayListBtn_Click" />
                 <Button Name="ClearVideoListBtn" Content="Clear" Canvas.Left="683" Canvas.Top="230" HorizontalAlignment="Center" VerticalAlignment="Top" Width="43" Click="ClearVideoListBtn_Click"></Button>
-                <Button Name="PlayAllVideosBtn" Content="Play all" Canvas.Left="651" Canvas.Top="204" HorizontalAlignment="Center" VerticalAlignment="Top" Width="112"/>
+                <Button Name="PlayAllVideosBtn" Content="Play all" Canvas.Left="651" Canvas.Top="204" HorizontalAlignment="Center" VerticalAlignment="Top" Width="112" Click="PlayAllVideosBtn_Click"/>
 
             </Canvas>
         </Grid>
