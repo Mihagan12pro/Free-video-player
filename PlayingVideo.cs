@@ -11,7 +11,7 @@ using System.Windows.Media.Animation;
 
 namespace Free_video_player
 {
-    internal class PlayingVideo
+    sealed class PlayingVideo:AbstractPlaying
     {
         private static PlayingVideo instance;
 
@@ -160,7 +160,7 @@ namespace Free_video_player
 
         }
 
-        private  void PauseAndPlay_Click(object sender, RoutedEventArgs e)
+        protected override  void PauseAndPlay_Click(object sender, RoutedEventArgs e)
         {
 
             if (mediaElement.Source != null)
@@ -197,7 +197,7 @@ namespace Free_video_player
             }
 
         }
-        private  void SkipAndForward_Click(object sender, RoutedEventArgs e)
+        protected override  void SkipAndForward_Click(object sender, RoutedEventArgs e)
         {
             
 
@@ -231,17 +231,17 @@ namespace Free_video_player
         }
         
 
-        private   void VolumeSlider_Change(object sender, RoutedEventArgs e)
+        protected override   void VolumeSlider_Change(object sender, RoutedEventArgs e)
         {
             mediaElement.Volume = volumeControl.Value;
         }
 
 
-        private  void VideoSlider_Change(object sender, RoutedEventArgs e)
+        protected override void VideoSlider_Change(object sender, RoutedEventArgs e)
         {
             mediaElement.Position = TimeSpan.FromSeconds(videoControl.Value);
         }
-        private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        protected override void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
         {
             isPause = true;
             pauseAndPlay.Content = "▶";
@@ -276,7 +276,6 @@ namespace Free_video_player
             return null;
         }
 
-
-       
+        
     }
 }

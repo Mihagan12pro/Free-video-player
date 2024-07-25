@@ -161,12 +161,28 @@ namespace Free_video_player
         {
             PlayAllVideosBtn.Click -= PlayAllVideosBtn_Click;
             PlayAllVideosBtn.Click += AbortPlayAllVideosBtn_Click;
+
+            PlayAllVideosBtn.Content = "Abort playing all";
+
+            if (playingVideo != null)
+            {
+                playingVideo = playingVideo.DestructInstance();
+            }
+
+            PlayListLb.SelectionChanged -= PlayListLb_SelectionChanged;
+
+
+            PlayListLb.SelectedIndex = -1;
         }
         private void AbortPlayAllVideosBtn_Click(object sender, RoutedEventArgs e)
         {
            
             PlayAllVideosBtn.Click -= AbortPlayAllVideosBtn_Click;
             PlayAllVideosBtn.Click += PlayAllVideosBtn_Click;
+
+            PlayAllVideosBtn.Content = "Play all";
+
+            PlayListLb.SelectionChanged += PlayListLb_SelectionChanged;
         }
 
 
