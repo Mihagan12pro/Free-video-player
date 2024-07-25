@@ -35,7 +35,7 @@ namespace Free_video_player
 
 
 
-        public static void iElement(UIElement uIElement)
+        public  static  void iElement(UIElement uIElement)
         {
             UIElementsList.Add(uIElement);
         }
@@ -53,13 +53,13 @@ namespace Free_video_player
 
             
                
-                    instance = instance.DestructInstance();
+            instance = instance.DestructInstance();
 
-                    indexInLb = index;
+            indexInLb = index;
 
-                    instance = new OneVideoPlayer(videoPath);
+            instance = new OneVideoPlayer(videoPath);
 
-                    return instance;
+            return instance;
                 
                
             

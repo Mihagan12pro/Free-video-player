@@ -10,6 +10,7 @@ namespace Free_video_player
 {
     public abstract class  AbstractPlayer
     {
+        
         protected abstract void VolumeSlider_Change(object sender, RoutedEventArgs e);
 
         protected abstract void VideoSlider_Change(object sender, RoutedEventArgs e);
@@ -17,5 +18,12 @@ namespace Free_video_player
         protected abstract void SkipAndForward_Click(object sender, RoutedEventArgs e);
 
         protected abstract void PauseAndPlay_Click(object sender, RoutedEventArgs e);
+
+
+
+        public  static void iElement(UIElement uIElement)
+        {
+
+        }
     }
 }

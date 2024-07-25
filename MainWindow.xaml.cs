@@ -22,8 +22,18 @@ namespace Free_video_player
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
+    /// 
+    
     public partial class MainWindow : Window
     {
+        const bool development = true;
+
+
+        private static List<UIElement> Elements =  new List<UIElement>();
+
+       
+
+
         private bool isPlay = true;
         private OneVideoPlayer playingVideo;
 
@@ -31,6 +41,11 @@ namespace Free_video_player
 
 
         private DispatcherTimer timer;
+
+        public static List<UIElement>GetElements()
+        {
+            return Elements;
+        }
 
 
         public MainWindow()
@@ -41,7 +56,7 @@ namespace Free_video_player
 
             foreach (UIElement el in mainGrid.Children)
             {
-
+                Elements.Add(el);
                 OneVideoPlayer.iElement(el);
 
             }
@@ -159,6 +174,13 @@ namespace Free_video_player
 
         private void PlayAllVideosBtn_Click(object sender, RoutedEventArgs e)
         {
+            if(development)
+            {
+                MessageBox.Show("Coming soon!");
+
+
+                return;
+            }
             PlayAllVideosBtn.Click -= PlayAllVideosBtn_Click;
             PlayAllVideosBtn.Click += AbortPlayAllVideosBtn_Click;
 
@@ -173,6 +195,18 @@ namespace Free_video_player
 
 
             PlayListLb.SelectedIndex = -1;
+
+
+            foreach(string item in PlayListLb.Items)
+            {
+                AllVideosPlayer allVideosPlayer = AllVideosPlayer.Instance(item);
+
+
+               
+                    allVideosPlayer.PlayCurrentVideo();
+                
+            }
+
         }
         private void AbortPlayAllVideosBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -184,7 +218,6 @@ namespace Free_video_player
 
             PlayListLb.SelectionChanged += PlayListLb_SelectionChanged;
         }
-
 
 
 
