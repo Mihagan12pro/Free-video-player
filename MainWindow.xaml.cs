@@ -57,6 +57,8 @@ namespace Free_video_player
 
 
             ClearVideoListBtn.Click += ClearVideoListBtn_Click;
+
+          
         }
 
 
@@ -157,10 +159,21 @@ namespace Free_video_player
 
         private void PlayAllVideosBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach(var item in PlayListLb.Items)
-            {
-                
-            }
+            PlayAllVideosBtn.Click -= PlayAllVideosBtn_Click;
+            PlayAllVideosBtn.Click += AbortPlayAllVideosBtn_Click;
         }
+        private void AbortPlayAllVideosBtn_Click(object sender, RoutedEventArgs e)
+        {
+           
+            PlayAllVideosBtn.Click -= AbortPlayAllVideosBtn_Click;
+            PlayAllVideosBtn.Click += PlayAllVideosBtn_Click;
+        }
+
+
+
+
+
+
+
     }
 }
