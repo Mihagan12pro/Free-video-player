@@ -25,7 +25,7 @@ namespace Free_video_player
     public partial class MainWindow : Window
     {
         private bool isPlay = true;
-        private PlayingVideo playingVideo;
+        private OneVideoPlayer playingVideo;
 
         private string[] invalidStringsArray = { "System.Windows.Controls.ListBoxItem: "};
 
@@ -42,7 +42,7 @@ namespace Free_video_player
             foreach (UIElement el in mainGrid.Children)
             {
 
-                PlayingVideo.iElement(el);
+                OneVideoPlayer.iElement(el);
 
             }
             timer = new DispatcherTimer();
@@ -109,7 +109,7 @@ namespace Free_video_player
                     //playingVideo = playingVideo.DestructInstance();
                 }
 
-                playingVideo = PlayingVideo.Instance(Convert.ToString(PlayListLb.ItemContainerGenerator.ContainerFromIndex(PlayListLb.SelectedIndex)), PlayListLb.SelectedIndex);
+                playingVideo = OneVideoPlayer.Instance(Convert.ToString(PlayListLb.ItemContainerGenerator.ContainerFromIndex(PlayListLb.SelectedIndex)), PlayListLb.SelectedIndex);
 
                 VideoPlayerMedia.Source =new Uri(playingVideo.videoPath.Replace(invalidStringsArray[0],"") );
 

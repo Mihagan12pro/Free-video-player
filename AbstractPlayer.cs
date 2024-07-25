@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Animation;
 namespace Free_video_player
 {
-    public abstract class  AbstractPlaying
+    public abstract class  AbstractPlayer
     {
         protected abstract void VolumeSlider_Change(object sender, RoutedEventArgs e);
 

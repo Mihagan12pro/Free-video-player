@@ -11,9 +11,9 @@ using System.Windows.Media.Animation;
 
 namespace Free_video_player
 {
-    sealed class PlayingVideo:AbstractPlaying
+    sealed class OneVideoPlayer:AbstractPlayer
     {
-        private static PlayingVideo instance;
+        private static OneVideoPlayer instance;
 
         public string videoPath { get; }
 
@@ -43,11 +43,11 @@ namespace Free_video_player
 
 
 
-        public static PlayingVideo Instance(string videoPath,int index)
+        public static OneVideoPlayer Instance(string videoPath,int index)
         {
             if (instance == null)
             {
-                instance = new PlayingVideo(videoPath);
+                instance = new OneVideoPlayer(videoPath);
                 return instance;
             }
 
@@ -57,7 +57,7 @@ namespace Free_video_player
 
                     indexInLb = index;
 
-                    instance = new PlayingVideo(videoPath);
+                    instance = new OneVideoPlayer(videoPath);
 
                     return instance;
                 
@@ -72,7 +72,7 @@ namespace Free_video_player
 
 
 
-        private PlayingVideo(string videoPath)
+        private OneVideoPlayer(string videoPath)
         {
             this.videoPath = videoPath;
            
@@ -249,7 +249,7 @@ namespace Free_video_player
         }
 
 
-        public  PlayingVideo DestructInstance()
+        public  OneVideoPlayer DestructInstance()
         {
             isPause = true;
             pauseAndPlay.Content = "▶";
