@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -281,7 +282,7 @@ namespace Free_video_player
                 {
                     TreeViewItem fileItem = new TreeViewItem();
 
-                    fileItem.Header = file.Name;    
+                    fileItem.Header = file.FullName;    
 
                     folderItem.Items.Add(fileItem);
                 }
@@ -291,9 +292,46 @@ namespace Free_video_player
 
         private void AddToVideosListBtn_Click(object sender, RoutedEventArgs e)
         {
-            var  selectedItem = PlaylistTrVw.SelectedItem;
+            string  selectedItem = PlaylistTrVw.ExtensionSelectedTrVwIt();
 
-            var a = selectedItem;
+            if (selectedItem != "Playlist")
+            {
+                FileInfo videoFile = new FileInfo(selectedItem);
+
+                DirectoryInfo playlistFolder;
+
+
+
+               
+                    
+                
+                if (videoFile.Exists)
+                {
+                    PlayListLb.Items.Add(selectedItem);
+                    return;
+                }
+
+                else 
+                {
+                    playlistFolder = new DirectoryInfo( playlistsFolderPath + "\\" + selectedItem);
+
+                    if (playlistFolder.Exists)
+                    {
+                        foreach (FileInfo file in playlistFolder.GetFiles())
+                        {
+                            PlayListLb.Items.Add(file.FullName);
+                        }
+                        return;
+                    }
+
+                    
+                }
+
+                
+                    MessageBox.Show("Unfortunately, we can't find this playlist or video file!", "Not exist error!");
+                
+            
+            }
 
         }
     }
