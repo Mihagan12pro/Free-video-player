@@ -242,6 +242,9 @@ namespace Free_video_player
             //}
 
 
+            PlaylistTrVwIt.Items.Clear();
+
+
             CreateFileTrVwIt(new DirectoryInfo(playlistsFolderPath),PlaylistTrVwIt);
             foreach(DirectoryInfo folder in new DirectoryInfo("Playlists").GetDirectories())
             {
@@ -286,6 +289,12 @@ namespace Free_video_player
             }
         }
 
+        private void AddToVideosListBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var  selectedItem = PlaylistTrVw.SelectedItem;
 
+            var a = selectedItem;
+
+        }
     }
 }
