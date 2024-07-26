@@ -28,9 +28,11 @@ namespace Free_video_player
     {
         const bool development = true;
 
+        private const string playlistsFolderPath = "Playlists";
 
         private static List<UIElement> Elements =  new List<UIElement>();
 
+       
        
 
 
@@ -51,6 +53,8 @@ namespace Free_video_player
         public MainWindow()
         {
             InitializeComponent();
+
+            CheckPlayLists();
 
             VideoPlayerMedia.LoadedBehavior = MediaState.Manual;
 
@@ -221,7 +225,66 @@ namespace Free_video_player
 
 
 
+        private void CheckPlayLists()
+        {
+            if (Directory.Exists("Playlists") == false)
+            {
+                Directory.CreateDirectory("Playlists");
+            }
 
+            //foreach(FileInfo file in new DirectoryInfo("Playlists").GetFiles())
+            //{
+            //    TreeViewItem fileItem = new TreeViewItem();
+
+            //    fileItem.Header = file.Name;
+
+            //    PlaylistTrVwIt.Items.Add(fileItem);
+            //}
+
+
+            CreateFileTrVwIt(new DirectoryInfo(playlistsFolderPath),PlaylistTrVwIt);
+            foreach(DirectoryInfo folder in new DirectoryInfo("Playlists").GetDirectories())
+            {
+                TreeViewItem folderItem = new TreeViewItem();
+
+                folderItem.Header = folder.Name;
+
+                PlaylistTrVwIt.Items.Add(folderItem);
+
+                CreateFileTrVwIt(folder,folderItem);
+
+            }
+        }
+
+
+        private void CreateFileTrVwIt(DirectoryInfo folder,TreeViewItem folderItem)
+        {
+            foreach(FileInfo file in folder.GetFiles())
+            {
+                bool isVideo = false;
+
+                string[] extensions = { ".avi",".mp4",".mkv"};
+
+
+                foreach(string extension in extensions)
+                {
+                    if (file.FullName.EndsWith(extension))
+                    {
+                        isVideo = true;
+                    }
+                }
+
+                if (isVideo)
+                {
+                    TreeViewItem fileItem = new TreeViewItem();
+
+                    fileItem.Header = file.Name;    
+
+                    folderItem.Items.Add(fileItem);
+                }
+                
+            }
+        }
 
 
     }

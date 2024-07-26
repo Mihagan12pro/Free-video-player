@@ -26,6 +26,16 @@
                 <Button Name="ClearVideoListBtn" Content="Clear" Canvas.Left="683" Canvas.Top="230" HorizontalAlignment="Center" VerticalAlignment="Top" Width="43" Click="ClearVideoListBtn_Click"></Button>
                 <Button Name="PlayAllVideosBtn" Content="Play all" Canvas.Left="651" Canvas.Top="204" HorizontalAlignment="Center" VerticalAlignment="Top" Width="112" Click="PlayAllVideosBtn_Click"/>
 
+
+                <TreeView Name="PlaylistTrVw" Height="255" Width="100" Canvas.Left="-1" Canvas.Top="36" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                    <TreeViewItem Name="PlaylistTrVwIt" Header="Playlist">
+                        
+                    </TreeViewItem>
+                </TreeView>
+
+                <Button Name="AddToVideosListBtn" Content="Add to videos list" Canvas.Left="1" Canvas.Top="296"></Button>
+                <Button Name="EditPlayLists" Content="Edit playlists" Canvas.Left="12" Canvas.Top="322"></Button>
+
             </Canvas>
         </Grid>
     </Viewbox>
