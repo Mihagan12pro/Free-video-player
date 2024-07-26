@@ -334,5 +334,13 @@ namespace Free_video_player
             }
 
         }
+
+        private void EditPlayLists_Click(object sender, RoutedEventArgs e)
+        {
+            PlayListEditorWindow playListEditor = new PlayListEditorWindow();
+
+
+            playListEditor.ShowDialog();
+        }
     }
 }

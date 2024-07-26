@@ -34,7 +34,7 @@
                 </TreeView>
 
                 <Button Name="AddToVideosListBtn" Content="Add to videos list" Canvas.Left="8" Canvas.Top="296" Click="AddToVideosListBtn_Click" HorizontalAlignment="Left" VerticalAlignment="Center" Width="136"></Button>
-                <Button Name="EditPlayLists" Content="Edit playlists" Canvas.Left="23" Canvas.Top="322" HorizontalAlignment="Left" VerticalAlignment="Center" Width="103"></Button>
+                <Button Name="EditPlayLists" Content="Edit playlists" Canvas.Left="23" Canvas.Top="322" HorizontalAlignment="Left" VerticalAlignment="Center" Width="103" Click="EditPlayLists_Click"></Button>
 
             </Canvas>
         </Grid>
