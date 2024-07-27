@@ -38,7 +38,7 @@ namespace Free_video_player
 
 
         private bool isPlay = true;
-        private OneVideoPlayer playingVideo;
+        private VideoPlayer playingVideo;
 
         private string[] invalidStringsArray = { "System.Windows.Controls.ListBoxItem: "};
 
@@ -62,7 +62,7 @@ namespace Free_video_player
             foreach (UIElement el in mainGrid.Children)
             {
                 Elements.Add(el);
-                OneVideoPlayer.iElement(el);
+                VideoPlayer.iElement(el);
 
             }
             timer = new DispatcherTimer();
@@ -129,7 +129,7 @@ namespace Free_video_player
                     //playingVideo = playingVideo.DestructInstance();
                 }
 
-                playingVideo = OneVideoPlayer.Instance(Convert.ToString(PlayListLb.ItemContainerGenerator.ContainerFromIndex(PlayListLb.SelectedIndex)), PlayListLb.SelectedIndex);
+                playingVideo = VideoPlayer.Instance(Convert.ToString(PlayListLb.ItemContainerGenerator.ContainerFromIndex(PlayListLb.SelectedIndex)), PlayListLb.SelectedIndex);
 
                 VideoPlayerMedia.Source =new Uri(playingVideo.videoPath.Replace(invalidStringsArray[0],"") );
 
@@ -186,31 +186,31 @@ namespace Free_video_player
 
                 return;
             }
-            PlayAllVideosBtn.Click -= PlayAllVideosBtn_Click;
-            PlayAllVideosBtn.Click += AbortPlayAllVideosBtn_Click;
+            //PlayAllVideosBtn.Click -= PlayAllVideosBtn_Click;
+            //PlayAllVideosBtn.Click += AbortPlayAllVideosBtn_Click;
 
-            PlayAllVideosBtn.Content = "Abort playing all";
+            //PlayAllVideosBtn.Content = "Abort playing all";
 
-            if (playingVideo != null)
-            {
-                playingVideo = playingVideo.DestructInstance();
-            }
+            //if (playingVideo != null)
+            //{
+            //    playingVideo = playingVideo.DestructInstance();
+            //}
 
-            PlayListLb.SelectionChanged -= PlayListLb_SelectionChanged;
-
-
-            PlayListLb.SelectedIndex = -1;
+            //PlayListLb.SelectionChanged -= PlayListLb_SelectionChanged;
 
 
-            foreach(string item in PlayListLb.Items)
-            {
-                AllVideosPlayer allVideosPlayer = AllVideosPlayer.Instance(item);
+            //PlayListLb.SelectedIndex = -1;
+
+
+            //foreach(string item in PlayListLb.Items)
+            //{
+            //    AllVideosPlayer allVideosPlayer = AllVideosPlayer.Instance(item);
 
 
                
-                    allVideosPlayer.PlayCurrentVideo();
+            //        allVideosPlayer.PlayCurrentVideo();
                 
-            }
+            //}
 
         }
         private void AbortPlayAllVideosBtn_Click(object sender, RoutedEventArgs e)

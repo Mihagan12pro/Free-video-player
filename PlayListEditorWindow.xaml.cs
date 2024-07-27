@@ -28,12 +28,15 @@ namespace Free_video_player
             InitializeComponent();
 
             CheckPlayLists();
+
+
+            Closing += PlayListEditorWindow_Closing;
         }
 
-
-
-
-
+        private void PlayListEditorWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+         
+        }
 
         public void CheckPlayLists()
         {

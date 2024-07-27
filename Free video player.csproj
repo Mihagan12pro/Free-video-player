@@ -55,11 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="WindowsMethods.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AllVideosPlayer.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -76,7 +76,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OneVideoPlayer.cs" />
+    <Compile Include="VideoPlayer.cs" />
     <Compile Include="PlayListEditorWindow.xaml.cs">
       <DependentUpon>PlayListEditorWindow.xaml</DependentUpon>
     </Compile>
