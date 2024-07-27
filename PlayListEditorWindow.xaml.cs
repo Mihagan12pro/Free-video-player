@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -76,34 +77,74 @@ namespace Free_video_player
 
             string fileName = AddNewTb.Text;
 
-            foreach(var ext in exten)
+
+            if (File.Exists((AddNewTb.Text)))
             {
-                if (AddNewTb.Text.EndsWith(ext))
+
+
+                foreach (var ext in exten)
                 {
-                 
-                    FileInfo file = new FileInfo(fileName);
-
-                    string name = file.Name;
-
-                    if (File.Exists(ChoosePlaylistCb.SelectedItem + "\\" + name))
+                    if (AddNewTb.Text.EndsWith(ext))
                     {
-                        MessageBox.Show("A file with a similar name exists in this playlist!");
-                    }
-                    else
-                    {
-                        if (ChoosePlaylistCb.SelectedIndex == 0)
+
+
+
+                        FileInfo file = new FileInfo(fileName);
+
+
+                        string newName = "";
+
+                        if (ChoosePlaylistCb.SelectedItem == playlistsFolderPath)
                         {
-                            File.Copy(fileName, ChoosePlaylistCb.SelectedItem + "\\" + name);
+                            newName = playlistsFolderPath + "\\" + file.Name;
                         }
                         else
                         {
-                            File.Copy(fileName,"Playlists"+"\\" + ChoosePlaylistCb.SelectedItem + "\\" + name);
+                            newName = playlistsFolderPath + "\\" + ChoosePlaylistCb.SelectedItem+"\\" + file.Name;
                         }
-                    }
-                    CheckPlaylists();
 
-                    break;
+                        if (File.Exists(newName))
+                        {
+                            MessageBox.Show("A file with a similar name exists in this playlist!");
+                        }
+                        else
+                        {
+                            File.Copy(fileName,newName);
+                        }
+
+
+                        //string newName =playlistsFolderPath + "\\" + file.Name;
+
+                        //if (!File.Exists(newName))
+                        //{
+
+                        //}
+
+                        //if (File.Exists(ChoosePlaylistCb.SelectedItem + "\\" + name))
+                        //{
+                        //    MessageBox.Show("A file with a similar name exists in this playlist!");
+                        //    return;
+                        //}
+                        //else
+                        //{
+                        //    if (ChoosePlaylistCb.SelectedIndex == 0)
+                        //    {
+                        //        File.Copy(fileName, ChoosePlaylistCb.SelectedItem + "\\" + name);
+                        //    }
+                        //    else
+                        //    {
+                        //        File.Copy(fileName,"Playlists"+"\\" + ChoosePlaylistCb.SelectedItem + "\\" + name);
+                        //    }
+                        //}
+                        CheckPlaylists();
+
+                        break;
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("This file does not exists!");
             }
 
         }
@@ -119,15 +160,30 @@ namespace Free_video_player
 
             ChoosePlaylistCb.Items.Clear();
 
-            ChoosePlaylistCb.Items.Add("Playlists");
+            ChoosePlaylistCb.Items.Add(playlistsFolderPath);
 
             ChoosePlaylistCb.SelectedIndex = 0;
 
-            foreach(string path in Directory.GetDirectories("Playlists"))
+            foreach(string path in Directory.GetDirectories(playlistsFolderPath))
             {
                 ChoosePlaylistCb.Items.Add(new DirectoryInfo(path).Name);
             }
 
+        }
+
+        private void FindFileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+
+            openFile.Filter = "Video files (*.mp4;*.avi;*.mkv)|*.mp4;*.avi;*.mkv|All files (*.*)|*.*";
+
+            bool? result = openFile.ShowDialog();
+
+
+            if (result == true)
+            {
+                AddNewTb.Text = openFile.FileName;
+            }
         }
     }
 }

@@ -21,7 +21,7 @@
 
             <TextBox x:Name="AddNewTb" Height="24" Width="192" Canvas.Left="320" Canvas.Top="286" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Button x:Name="AddToPlaylist" Content="Add" Canvas.Left="511" Canvas.Top="286" Height="24" Width="35" HorizontalAlignment="Left" VerticalAlignment="Top" Click="AddToPlaylist_Click"/>
-            <Button Name="FindFileBtn" Content="Find" Canvas.Left="545" Canvas.Top="286" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="35"></Button>
+            <Button Name="FindFileBtn" Content="Find" Canvas.Left="545" Canvas.Top="286" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="35" Click="FindFileBtn_Click"></Button>
             <Label FontSize="9" x:Name="AddNewLb" Content="Add new file" BorderBrush="Gray" BorderThickness="1"  Background="GhostWhite" Canvas.Left="201" Canvas.Top="286" Width="119" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
             <Label FontSize="9"  Content="Delete file/clear playlist" Name="DeleteFileLl"  Canvas.Left="201" Canvas.Top="171" HorizontalAlignment="Left" VerticalAlignment="Top" Width="119" BorderBrush="Gray" BorderThickness="1"  Background="GhostWhite" />
