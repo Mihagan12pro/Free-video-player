@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,84 +29,15 @@ namespace Free_video_player
         {
             InitializeComponent();
 
-            CheckPlayLists();
+            CheckPlaylists();
 
 
-            Closing += PlayListEditorWindow_Closing;
+           
         }
 
-        private void PlayListEditorWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-         
-        }
-
-        public void CheckPlayLists()
-        {
-            if (Directory.Exists("Playlists") == false)
-            {
-                Directory.CreateDirectory("Playlists");
-            }
+     
 
 
-
-
-            PlaylistTrVwIt.Items.Clear();
-
-            ChoosePlaylistCb.Items.Clear();
-            ChoosePlaylistCb.Items.Add("Playlists");
-
-            ChoosePlaylistCb.SelectedIndex = 0;
-
-            CreateFileTrVwIt(new DirectoryInfo(playlistsFolderPath), PlaylistTrVwIt);
-            foreach (DirectoryInfo folder in new DirectoryInfo("Playlists").GetDirectories())
-            {
-                ChoosePlaylistCb.Items.Add(folder.Name);
-
-
-                TreeViewItem folderItem = new TreeViewItem();
-
-                folderItem.Header = folder.Name;
-
-                PlaylistTrVwIt.Items.Add(folderItem);
-
-                CreateFileTrVwIt(folder, folderItem);
-
-            }
-
-
-
-
-        }
-
-
-        private void CreateFileTrVwIt(DirectoryInfo folder, TreeViewItem folderItem)
-        {
-            foreach (FileInfo file in folder.GetFiles())
-            {
-                bool isVideo = false;
-
-                
-
-
-                foreach (string extension in MainWindow.extensions)
-                {
-                    if (file.FullName.EndsWith(extension))
-                    {
-                        isVideo = true;
-                    }
-                }
-
-                if (isVideo)
-                {
-                    TreeViewItem fileItem = new TreeViewItem();
-
-                    fileItem.Header = file.FullName;
-
-                    folderItem.Items.Add(fileItem);
-                }
-
-            }
-        }
 
         private void WritNewNameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -132,7 +65,7 @@ namespace Free_video_player
 
             Directory.CreateDirectory((playlistsFolderPath + "\\" + newPlayListName));
 
-            CheckPlayLists();
+            CheckPlaylists();
 
 
         }
@@ -167,10 +100,32 @@ namespace Free_video_player
                             File.Copy(fileName,"Playlists"+"\\" + ChoosePlaylistCb.SelectedItem + "\\" + name);
                         }
                     }
-                    CheckPlayLists();
-                    
+                    CheckPlaylists();
+
                     break;
                 }
+            }
+
+        }
+
+
+
+
+
+        private  void CheckPlaylists()
+        {
+            WindowsMethods.CheckPlaylists(PlaylistsEditorTrVwIt);
+
+
+            ChoosePlaylistCb.Items.Clear();
+
+            ChoosePlaylistCb.Items.Add("Playlists");
+
+            ChoosePlaylistCb.SelectedIndex = 0;
+
+            foreach(string path in Directory.GetDirectories("Playlists"))
+            {
+                ChoosePlaylistCb.Items.Add(new DirectoryInfo(path).Name);
             }
 
         }

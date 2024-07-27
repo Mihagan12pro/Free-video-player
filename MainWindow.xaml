@@ -28,7 +28,7 @@
 
 
                 <TreeView Name="PlaylistTrVw" Height="255" Width="153" Canvas.Left="-1" Canvas.Top="36" HorizontalAlignment="Left" VerticalAlignment="Center" >
-                    <TreeViewItem Name="PlaylistTrVwIt" Header="Playlist">
+                    <TreeViewItem Name="PlaylistsMainTrVwIt" Header="Playlist">
 
                     </TreeViewItem>
                 </TreeView>

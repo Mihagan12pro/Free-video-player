@@ -10,7 +10,7 @@
         <Canvas>
             <TreeView Height="374" Canvas.Top="29" Name="PlaylistTrVw"  Width="125" HorizontalAlignment="Center" VerticalAlignment="Top">
 
-                <TreeViewItem Name="PlaylistTrVwIt" Header="Playlist" >
+                <TreeViewItem Name="PlaylistsEditorTrVwIt" Header="Playlist" >
                 </TreeViewItem>
             </TreeView>
 

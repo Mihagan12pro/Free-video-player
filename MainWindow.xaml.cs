@@ -45,6 +45,9 @@ namespace Free_video_player
 
         private DispatcherTimer timer;
 
+
+        
+
         public static List<UIElement>GetElements()
         {
             return Elements;
@@ -55,7 +58,7 @@ namespace Free_video_player
         {
             InitializeComponent();
 
-            CheckPlayLists();
+            WindowsMethods.CheckPlaylists(PlaylistsMainTrVwIt);
 
             VideoPlayerMedia.LoadedBehavior = MediaState.Manual;
 
@@ -186,31 +189,7 @@ namespace Free_video_player
 
                 return;
             }
-            //PlayAllVideosBtn.Click -= PlayAllVideosBtn_Click;
-            //PlayAllVideosBtn.Click += AbortPlayAllVideosBtn_Click;
 
-            //PlayAllVideosBtn.Content = "Abort playing all";
-
-            //if (playingVideo != null)
-            //{
-            //    playingVideo = playingVideo.DestructInstance();
-            //}
-
-            //PlayListLb.SelectionChanged -= PlayListLb_SelectionChanged;
-
-
-            //PlayListLb.SelectedIndex = -1;
-
-
-            //foreach(string item in PlayListLb.Items)
-            //{
-            //    AllVideosPlayer allVideosPlayer = AllVideosPlayer.Instance(item);
-
-
-               
-            //        allVideosPlayer.PlayCurrentVideo();
-                
-            //}
 
         }
         private void AbortPlayAllVideosBtn_Click(object sender, RoutedEventArgs e)
@@ -225,70 +204,6 @@ namespace Free_video_player
         }
 
 
-
-        private void CheckPlayLists()
-        {
-            if (Directory.Exists("Playlists") == false)
-            {
-                Directory.CreateDirectory("Playlists");
-            }
-
-            //foreach(FileInfo file in new DirectoryInfo("Playlists").GetFiles())
-            //{
-            //    TreeViewItem fileItem = new TreeViewItem();
-
-            //    fileItem.Header = file.Name;
-
-            //    PlaylistTrVwIt.Items.Add(fileItem);
-            //}
-
-
-            PlaylistTrVwIt.Items.Clear();
-
-
-            CreateFileTrVwIt(new DirectoryInfo(playlistsFolderPath),PlaylistTrVwIt);
-            foreach(DirectoryInfo folder in new DirectoryInfo("Playlists").GetDirectories())
-            {
-                TreeViewItem folderItem = new TreeViewItem();
-
-                folderItem.Header = folder.Name;
-
-                PlaylistTrVwIt.Items.Add(folderItem);
-
-                CreateFileTrVwIt(folder,folderItem);
-
-            }
-        }
-
-
-        private void CreateFileTrVwIt(DirectoryInfo folder,TreeViewItem folderItem)
-        {
-            foreach(FileInfo file in folder.GetFiles())
-            {
-                bool isVideo = false;
-
-               
-
-
-                foreach(string extension in extensions)
-                {
-                    if (file.FullName.EndsWith(extension))
-                    {
-                        isVideo = true;
-                    }
-                }
-
-                if (isVideo)
-                {
-                    TreeViewItem fileItem = new TreeViewItem();
-
-                    fileItem.Header = file.FullName;    
-
-                    folderItem.Items.Add(fileItem);
-                }
-                
-            }
-        }
 
         private void AddToVideosListBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -340,10 +255,16 @@ namespace Free_video_player
             PlayListEditorWindow playListEditor = new PlayListEditorWindow();
 
 
-            playListEditor.ShowDialog();
+            bool? result = playListEditor.ShowDialog();
 
 
             VideoPlayerMedia.Pause();
+
+
+            if (result == false)
+            {
+                WindowsMethods.CheckPlaylists(PlaylistsMainTrVwIt);
+            }
         }
     }
 }
