@@ -35,7 +35,7 @@ namespace Free_video_player
 
 
 
-        private void CheckPlayLists()
+        public void CheckPlayLists()
         {
             if (Directory.Exists("Playlists") == false)
             {
@@ -48,7 +48,9 @@ namespace Free_video_player
             PlaylistTrVwIt.Items.Clear();
 
             ChoosePlaylistCb.Items.Clear();
-            ChoosePlaylistCb.Items.Add("Playlist");
+            ChoosePlaylistCb.Items.Add("Playlists");
+
+            ChoosePlaylistCb.SelectedIndex = 0;
 
             CreateFileTrVwIt(new DirectoryInfo(playlistsFolderPath), PlaylistTrVwIt);
             foreach (DirectoryInfo folder in new DirectoryInfo("Playlists").GetDirectories())
@@ -78,10 +80,10 @@ namespace Free_video_player
             {
                 bool isVideo = false;
 
-                string[] extensions = { ".avi", ".mp4", ".mkv" };
+                
 
 
-                foreach (string extension in extensions)
+                foreach (string extension in MainWindow.extensions)
                 {
                     if (file.FullName.EndsWith(extension))
                     {
@@ -135,14 +137,35 @@ namespace Free_video_player
         private void AddToPlaylist_Click(object sender, RoutedEventArgs e)
         {
             var exten = MainWindow.extensions;
-            
+
+            string fileName = AddNewTb.Text;
 
             foreach(var ext in exten)
             {
                 if (AddNewTb.Text.EndsWith(ext))
                 {
+                 
+                    FileInfo file = new FileInfo(fileName);
 
+                    string name = file.Name;
 
+                    if (File.Exists(ChoosePlaylistCb.SelectedItem + "\\" + name))
+                    {
+                        MessageBox.Show("A file with a similar name exists in this playlist!");
+                    }
+                    else
+                    {
+                        if (ChoosePlaylistCb.SelectedIndex == 0)
+                        {
+                            File.Copy(fileName, ChoosePlaylistCb.SelectedItem + "\\" + name);
+                        }
+                        else
+                        {
+                            File.Copy(fileName,"Playlists"+"\\" + ChoosePlaylistCb.SelectedItem + "\\" + name);
+                        }
+                    }
+                    CheckPlayLists();
+                    
                     break;
                 }
             }
