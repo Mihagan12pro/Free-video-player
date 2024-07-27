@@ -14,8 +14,8 @@
                 </TreeViewItem>
             </TreeView>
 
-            <TextBox Name="WritNewNameTb" HorizontalAlignment="Center" Height="26" VerticalAlignment="Top" Width="193" Canvas.Left="319" Canvas.Top="119" TextChanged="WritNewNameTb_TextChanged"></TextBox>
-            <Button Name="CreateNewBtn"  Content="Create" Canvas.Left="512" Canvas.Top="119" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="68"/>
+            <TextBox Name="CreateNewTb" HorizontalAlignment="Center" Height="26" VerticalAlignment="Top" Width="193" Canvas.Left="319" Canvas.Top="119" TextChanged="WritNewNameTb_TextChanged"></TextBox>
+            <Button Name="CreateNewBtn"  Content="Create" Canvas.Left="512" Canvas.Top="119" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="68" Click="CreateNewBtn_Click"/>
             <Label FontSize="9" Name="CreateNewLl" Content="Create new playlist" BorderBrush="Gray" BorderThickness="1"  Background="GhostWhite" Canvas.Left="201" Canvas.Top="119" HorizontalAlignment="Left" VerticalAlignment="Center" Width="119" Height="26"/>
 
 

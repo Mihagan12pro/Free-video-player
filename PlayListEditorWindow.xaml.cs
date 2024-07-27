@@ -42,14 +42,7 @@ namespace Free_video_player
                 Directory.CreateDirectory("Playlists");
             }
 
-            //foreach(FileInfo file in new DirectoryInfo("Playlists").GetFiles())
-            //{
-            //    TreeViewItem fileItem = new TreeViewItem();
 
-            //    fileItem.Header = file.Name;
-
-            //    PlaylistTrVwIt.Items.Add(fileItem);
-            //}
 
 
             PlaylistTrVwIt.Items.Clear();
@@ -101,6 +94,25 @@ namespace Free_video_player
 
         private void WritNewNameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
+
+        }
+
+        private void CreateNewBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string newPlayListName = CreateNewTb.Text;
+
+
+            if (Directory.Exists(playlistsFolderPath+"\\" + newPlayListName))
+            {
+                MessageBox.Show("You can't create a playlist with that name because a playlist with that name exists!");
+                return;
+            }
+
+
+            Directory.CreateDirectory((playlistsFolderPath + "\\" + newPlayListName));
+
+            CheckPlayLists();
+
 
         }
     }
