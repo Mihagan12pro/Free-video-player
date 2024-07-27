@@ -33,8 +33,8 @@ namespace Free_video_player
 
         private static List<UIElement> Elements =  new List<UIElement>();
 
-       
-       
+
+        public static string[] extensions = { ".avi", ".mp4", ".mkv" };
 
 
         private bool isPlay = true;
@@ -267,7 +267,7 @@ namespace Free_video_player
             {
                 bool isVideo = false;
 
-                string[] extensions = { ".avi",".mp4",".mkv"};
+               
 
 
                 foreach(string extension in extensions)
@@ -341,6 +341,9 @@ namespace Free_video_player
 
 
             playListEditor.ShowDialog();
+
+
+            VideoPlayerMedia.Pause();
         }
     }
 }

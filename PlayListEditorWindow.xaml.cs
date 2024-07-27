@@ -47,10 +47,15 @@ namespace Free_video_player
 
             PlaylistTrVwIt.Items.Clear();
 
+            ChoosePlaylistCb.Items.Clear();
+            ChoosePlaylistCb.Items.Add("Playlist");
 
             CreateFileTrVwIt(new DirectoryInfo(playlistsFolderPath), PlaylistTrVwIt);
             foreach (DirectoryInfo folder in new DirectoryInfo("Playlists").GetDirectories())
             {
+                ChoosePlaylistCb.Items.Add(folder.Name);
+
+
                 TreeViewItem folderItem = new TreeViewItem();
 
                 folderItem.Header = folder.Name;
@@ -60,6 +65,10 @@ namespace Free_video_player
                 CreateFileTrVwIt(folder, folderItem);
 
             }
+
+
+
+
         }
 
 
@@ -101,6 +110,11 @@ namespace Free_video_player
         {
             string newPlayListName = CreateNewTb.Text;
 
+            if (newPlayListName == "Playlists")
+            {
+                MessageBox.Show("Invalid name!");
+                return;
+            }
 
             if (Directory.Exists(playlistsFolderPath+"\\" + newPlayListName))
             {
@@ -108,11 +122,30 @@ namespace Free_video_player
                 return;
             }
 
+            
+
 
             Directory.CreateDirectory((playlistsFolderPath + "\\" + newPlayListName));
 
             CheckPlayLists();
 
+
+        }
+
+        private void AddToPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            var exten = MainWindow.extensions;
+            
+
+            foreach(var ext in exten)
+            {
+                if (AddNewTb.Text.EndsWith(ext))
+                {
+
+
+                    break;
+                }
+            }
 
         }
     }
