@@ -168,7 +168,22 @@ namespace Free_video_player
 
         private void DeletePlaylistBtn_Click(object sender, RoutedEventArgs e)
         {
-           
+
+            CheckPlaylists();
+            if (!(DeletePlaylistTb.Text.Length > 0 && DeletePlaylistTb.Text != playlistsFolderPath && Directory.Exists(playlistsFolderPath+ "\\" + DeletePlaylistTb.Text)))
+            {
+
+                MessageBox.Show("This playlists does not exist!");
+
+
+                return;
+                
+            }
+
+            Directory.Delete(playlistsFolderPath + "\\" + DeletePlaylistTb.Text,true);
+
+            CheckPlaylists();
+
         }
 
 
