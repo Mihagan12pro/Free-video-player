@@ -221,8 +221,7 @@ namespace Free_video_player
         {
             if (!File.Exists(DeleteFileTb.Text))
             {
-               var z1 = DeleteFileTb.Text;
-                var z2 = z1;
+           
 
                 MessageBox.Show("This video file does not exists!");
                 return;
@@ -230,9 +229,7 @@ namespace Free_video_player
 
             CheckPlaylists();
 
-            var a = DeleteFileTb.Text;
-
-            var b = a;
+         
 
             File.Delete(DeleteFileTb.Text);
 
