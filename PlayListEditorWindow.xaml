@@ -27,13 +27,13 @@
             <Label FontSize="9"  Content="Delete file/clear playlist" Name="DeleteFileLl"  Canvas.Left="201" Canvas.Top="171" HorizontalAlignment="Left" VerticalAlignment="Top" Width="119" BorderBrush="Gray" BorderThickness="1"  Background="GhostWhite" />
             <TextBox Name="DeleteFileTb" Canvas.Left="320" TextWrapping="Wrap"  Canvas.Top="171" Width="191" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24"/>
             <Button Name="DeleteFileBtn" FontSize="11" Content="Delete" Canvas.Left="511" Canvas.Top="171" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="36" Click="DeleteFileBtn_Click"></Button>
-            <Button Name="ClearBtn"  Content="Clear" Canvas.Left="547" Canvas.Top="171" HorizontalAlignment="Left" VerticalAlignment="Top" Width="34" Height="24" ></Button>
+            <Button Name="ClearBtn"  Content="Clear" Canvas.Left="547" Canvas.Top="171" HorizontalAlignment="Left" VerticalAlignment="Top" Width="34" Height="24" Click="ClearBtn_Click" ></Button>
 
             <Label Name="DeletePlaylistLl" BorderBrush="Gray" BorderThickness="1"  Background="GhostWhite" FontSize="9" Content="Delete playlist" Canvas.Left="201" Canvas.Top="273" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="28"></Label>
             <Button Name="DeletePlaylistBtn" Content="Delete" Canvas.Left="512" Canvas.Top="273" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="28" Click="DeletePlaylistBtn_Click" ></Button>
             <TextBox Name ="DeletePlaylistTb" Canvas.Left="321" TextWrapping="Wrap"  Canvas.Top="273" Width="191" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28"/>
-            <ComboBox Name="ChoosePlaylistCb" Canvas.Left="603" Canvas.Top="209" Width="79" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top"/>
-            <Label Content="Choose playlist" FontSize="9" BorderBrush="Gray" BorderThickness="1"  Background="#c0f0ed" Canvas.Left="682" Canvas.Top="209" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top"/>
+            <ComboBox Name="ChoosePlaylistCb" Canvas.Left="603" Canvas.Top="175" Width="79" HorizontalAlignment="Center" Height="60" VerticalAlignment="Top"/>
+            <Label Content="Choose playlist" FontSize="9" BorderBrush="Gray" BorderThickness="1"  Background="#c0f0ed" Canvas.Left="682" Canvas.Top="174" HorizontalAlignment="Center" Height="61" VerticalAlignment="Top"/>
 
         </Canvas>
     </Grid>

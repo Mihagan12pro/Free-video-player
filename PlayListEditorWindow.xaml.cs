@@ -210,7 +210,7 @@ namespace Free_video_player
 
 
             }
-            else
+           if(File.Exists(selectedTrVwIt))
             {
                 DeleteFileTb.Text = selectedTrVwIt;
             }
@@ -238,6 +238,29 @@ namespace Free_video_player
 
             CheckPlaylists();
 
+        }
+
+        private void ClearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (ChoosePlaylistCb.SelectedIndex == 0 && Directory.Exists(ChoosePlaylistCb.SelectedItem.ToString()))
+            {
+                 Directory.Delete(Convert.ToString(ChoosePlaylistCb.SelectedItem),true);
+
+
+                Directory.CreateDirectory(ChoosePlaylistCb.SelectedItem.ToString());
+            }
+            else if(Directory.Exists(playlistsFolderPath + "\\" + ChoosePlaylistCb.SelectedItem))
+            {
+                Directory.Delete(Convert.ToString(playlistsFolderPath+"\\"+ChoosePlaylistCb.SelectedItem), true);
+
+                Directory.CreateDirectory(Convert.ToString(playlistsFolderPath + "\\" + ChoosePlaylistCb.SelectedItem));
+            }
+            else
+            {
+                MessageBox.Show("This playlist does not exists!");
+            }
+            CheckPlaylists();
         }
     }
 }
