@@ -33,7 +33,10 @@ namespace Free_video_player
             CheckPlaylists();
 
 
-           
+            PlaylistsEditorTrVwIt.Header = playlistsFolderPath;
+            PlaylistTrVw.SelectedItemChanged += PlaylistTrVw_SelectionChanged;
+
+
         }
 
      
@@ -113,29 +116,6 @@ namespace Free_video_player
                         }
 
 
-                        //string newName =playlistsFolderPath + "\\" + file.Name;
-
-                        //if (!File.Exists(newName))
-                        //{
-
-                        //}
-
-                        //if (File.Exists(ChoosePlaylistCb.SelectedItem + "\\" + name))
-                        //{
-                        //    MessageBox.Show("A file with a similar name exists in this playlist!");
-                        //    return;
-                        //}
-                        //else
-                        //{
-                        //    if (ChoosePlaylistCb.SelectedIndex == 0)
-                        //    {
-                        //        File.Copy(fileName, ChoosePlaylistCb.SelectedItem + "\\" + name);
-                        //    }
-                        //    else
-                        //    {
-                        //        File.Copy(fileName,"Playlists"+"\\" + ChoosePlaylistCb.SelectedItem + "\\" + name);
-                        //    }
-                        //}
                         CheckPlaylists();
 
                         break;
@@ -183,6 +163,23 @@ namespace Free_video_player
             if (result == true)
             {
                 AddNewTb.Text = openFile.FileName;
+            }
+        }
+
+        private void DeletePlaylistBtn_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+
+        private void PlaylistTrVw_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            string selectedTrVwIt = ExtensionMethods.ExtensionSelectedTrVwIt(PlaylistTrVw);
+
+            if (selectedTrVwIt != playlistsFolderPath )
+            {
+                if (File.Exists(selectedTrVwIt)==false)
+                   DeletePlaylistTb.Text = selectedTrVwIt;
             }
         }
     }
