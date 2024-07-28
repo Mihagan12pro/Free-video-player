@@ -203,14 +203,40 @@ namespace Free_video_player
         {
             string selectedTrVwIt = ExtensionMethods.ExtensionSelectedTrVwIt(PlaylistTrVw);
 
-          
-                if (File.Exists(selectedTrVwIt)==false)
-                   DeletePlaylistTb.Text = selectedTrVwIt;
-            
+
+            if (File.Exists(selectedTrVwIt) == false && Directory.Exists(selectedTrVwIt ))
+            {
+                DeletePlaylistTb.Text = selectedTrVwIt;
+
+
+            }
+            else
+            {
+                DeleteFileTb.Text = selectedTrVwIt;
+            }
+           
         }
 
         private void DeleteFileBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (!File.Exists(DeleteFileTb.Text))
+            {
+               var z1 = DeleteFileTb.Text;
+                var z2 = z1;
+
+                MessageBox.Show("This video file does not exists!");
+                return;
+            }
+
+            CheckPlaylists();
+
+            var a = DeleteFileTb.Text;
+
+            var b = a;
+
+            File.Delete(DeleteFileTb.Text);
+
+            CheckPlaylists();
 
         }
     }
