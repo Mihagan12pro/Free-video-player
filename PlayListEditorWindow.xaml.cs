@@ -170,7 +170,7 @@ namespace Free_video_player
         {
 
             CheckPlaylists();
-            if (!(DeletePlaylistTb.Text.Length > 0 && DeletePlaylistTb.Text != playlistsFolderPath && Directory.Exists(playlistsFolderPath+ "\\" + DeletePlaylistTb.Text)))
+            if (!(DeletePlaylistTb.Text.Length > 0  && ( Directory.Exists(playlistsFolderPath+ "\\" + DeletePlaylistTb.Text) || Directory.Exists(playlistsFolderPath))  ))
             {
 
                 MessageBox.Show("This playlists does not exist!");
@@ -180,7 +180,19 @@ namespace Free_video_player
                 
             }
 
-            Directory.Delete(playlistsFolderPath + "\\" + DeletePlaylistTb.Text,true);
+            if (DeletePlaylistTb.Text == playlistsFolderPath)
+            {
+
+
+                Directory.Delete(playlistsFolderPath,true);
+               
+            }
+            else
+            {
+                Directory.Delete(playlistsFolderPath + "\\" + DeletePlaylistTb.Text, true);
+            }
+            
+
 
             CheckPlaylists();
 
@@ -191,11 +203,15 @@ namespace Free_video_player
         {
             string selectedTrVwIt = ExtensionMethods.ExtensionSelectedTrVwIt(PlaylistTrVw);
 
-            if (selectedTrVwIt != playlistsFolderPath )
-            {
+          
                 if (File.Exists(selectedTrVwIt)==false)
                    DeletePlaylistTb.Text = selectedTrVwIt;
-            }
+            
+        }
+
+        private void DeleteFileBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
